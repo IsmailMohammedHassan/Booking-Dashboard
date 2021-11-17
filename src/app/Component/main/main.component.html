@@ -1,0 +1,121 @@
+<div class="container my-5  bg-white p-3 rounded-3">
+  <div class="d-flex my-3 flex-wrap">
+    <h1 class="flex-grow-1">Group homepage</h1>
+    <button class="btn btn-primary" routerLink="/add-property-home">Add New Property</button>
+  </div>
+
+  <div *ngIf="apartments.length<=0&&campgroundAny.length<=0&&hotelAny.length<=0">
+    <div class="d-flex py-5 my-5 justify-content-lg-center align-items-center flex-column">
+      <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="70px"
+        fill="#888888" height="70px" class="bui-empty-state__icon">
+        <path
+          d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z">
+        </path>
+      </svg>
+      <h4 class="my-4" style="color:#888888">No properties yet</h4>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col">
+
+      <ng-container *ngIf="apartments==[]">
+        <div style="overflow-x: auto" class="table-div">
+          <table>
+            <tr class="py-2">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Status</th>
+
+              <th>Messages</th>
+              <th>Bookings</th>
+            </tr>
+
+            <tr *ngFor="let apartment of apartments; let i = index">
+              <td>{{i+1}}</td>
+              <td (click)="apartmentRedirect(apartment)">{{apartment.apartmentName }}</td>
+              <td>{{apartment.country}}/{{apartment.city}}</td>
+              <td>{{apartment.status}}</td>
+
+              <td>
+                <span class="badge rounded-circle bg-secondary">{{
+                  apartment.messages.length
+                  }}</span>
+              </td>
+              <td>
+                <span class="badge rounded-pill bg-secondary">{{
+                  apartment.bookings.length
+                  }}</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </ng-container>
+
+      <br />
+      <ng-container *ngIf="hotelAny==[]">
+        <div style="overflow-x: auto" class="table-div">
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Status</th>
+
+              <th>Messages</th>
+              <th>Bookings</th>
+            </tr>
+
+            <tr *ngFor="let hotel of hotelAny; let i = index">
+              <td>{{i+1}}</td>
+              <td (click)="hotelRedirect(hotel)">{{hotel.hotelName}}</td>
+              <td>{{hotel.country}}/{{hotel.city}}</td>
+              <td>{{hotel.status}}</td>
+
+              <td>
+                <span class="badge rounded-circle bg-secondary">{{
+                  hotel.messages.length
+                  }}</span>
+              </td>
+              <td>
+                <span class="badge rounded-circle bg-secondary">
+                  {{hotelBooking[i]}}
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </ng-container>
+
+      <br />
+      <ng-container *ngIf="campgroundAny==[]">
+        <div style="overflow-x: auto " class="table-div">
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Status</th>
+
+              <th>Messages</th>
+              <th>Bookings</th>
+            </tr>
+
+            <tr *ngFor="let camp of campgroundAny; let i = index">
+              <td>{{i+1}}</td>
+              <td (click)="campRedirect(camp)">{{camp.campgroundName}}</td>
+              <td>{{camp.country}}/{{camp.city}}</td>
+              <td>{{camp.status}}</td>
+
+              <td><span class="badge rounded-circle bg-secondary">{{camp.messages?.length}}</span></td>
+              <td><span class="badge rounded-circle bg-secondary">{{campid[i]}}</span></td>
+
+            </tr>
+          </table>
+
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

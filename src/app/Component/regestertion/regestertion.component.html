@@ -1,0 +1,100 @@
+<header>
+  <div class="container pt-2  d-flex align-items-center">
+    <h1>Booking.com</h1>
+  </div>
+</header>
+<div class="my-login-page">
+  <section class="h-100">
+    <div class="container h-100">
+      <div class="row justify-content-md-center h-100">
+        <div class="card-wrapper">
+          <div class="brand">
+            <img src="assets/booking-logo-504475D532-seeklogo.com.png" alt="bootstrap 4 login page">
+          </div>
+          <div class="card fat">
+            <div class="card-body">
+              <h2 class="card-title text-center">Registeration</h2>
+              <form class="my-login-validation" novalidate="" (ngSubmit)="registration()" #ngForm="ngForm">
+                <div class="form-group">
+                  <label for="name">User name</label>
+                  <input id="name" type="text" #username="ngModel" [(ngModel)]="UserData.username" class="form-control"
+                    name="name" required autofocus>
+                  <div class="alert-danger p-2 mt-2 rounded-2"
+                    *ngIf="username.invalid && (username.dirty || username.touched)">
+                    Username is required
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">E-Mail Address</label>
+                  <input id="email" type="email" #email="ngModel" [(ngModel)]="UserData.email" class="form-control"
+                    name="email" required>
+
+                  <div class="alert-danger p-2 mt-2 rounded-2" *ngIf="email.invalid && (email.dirty || email.touched)">
+                    Email is required
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input id="password" type="password" #password="ngModel" [(ngModel)]="UserData.password"
+                    class="form-control" name="password" required data-eye>
+
+                  <div class="alert-danger p-2 mt-2 rounded-2"
+                    *ngIf="password.invalid && (password.dirty || password.touched)">
+                    Password is required
+                  </div>
+                </div>
+                <div class="d-flex justify-content-evenly my-4">
+                  <div class="form-check form-check-inline ">
+                    <input class="form-check-input" type="radio" (click)="userCheck()" checked name="inlineRadioOptions"
+                      id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">Guest</label>
+                  </div>
+                  <div class="form-check form-check-inline ">
+                    <input class=" form-check-input" type="radio" (click)="partnerCheck()" name="inlineRadioOptions"
+                      id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">Partner</label>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <div class="custom-checkbox custom-control">
+                    <input type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
+                    <label for="agree" class="custom-control-label">I agree to the <a href="#">Terms and
+                        Conditions</a></label>
+                    <div class="invalid-feedback">
+                      You must agree with our Terms and Conditions
+                    </div>
+                  </div>
+                </div>
+
+                <div class="alert-success p-2 mt-2 rounded-2 my-2" *ngIf="success">
+                  {{success}}
+                </div>
+
+                <div class="alert-danger p-2 mt-2 rounded-2 my-2" *ngIf="wrong">
+                  {{wrong}}
+                </div>
+
+                <div class="form-group m-0">
+                  <button type="submit" class="btn btn-primary btn-block" [disabled]="!ngForm.valid">
+                    Register
+                  </button>
+                </div>
+                <div class="mt-4 text-center">
+                  Already have an account? <a routerLink="/login">Login</a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="footer">
+            Copyright &copy; 2021 &mdash; Booking.com
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

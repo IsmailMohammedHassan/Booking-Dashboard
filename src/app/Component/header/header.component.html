@@ -1,0 +1,167 @@
+<header>
+  <div class="container d-flex align-items-center py-3 align-items-center justify-content-between">
+    <div class="d-flex">
+      <h1 class="booking-header my-auto">Booking.com</h1>
+
+    </div>
+
+    <div class="d-flex ">
+      <form class="d-flex align-items-center">
+        <input class="form-control search-input me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn" type="submit">
+          <svg focusable="false" fill="currentColor" height="19" width="19" role="presentation" fill="white"
+            aria-hidden="true" viewBox="0 0 24 24"
+            class="ext-search-input__icon ext-search-input__icon--white bk-icon -streamline-magnifying_glass">
+            <path
+              d="M17.464 6.56a8.313 8.313 0 1 1-15.302 6.504A8.313 8.313 0 0 1 17.464 6.56zm1.38-.586C16.724.986 10.963-1.339 5.974.781.988 2.9-1.337 8.662.783 13.65c2.12 4.987 7.881 7.312 12.87 5.192 4.987-2.12 7.312-7.881 5.192-12.87zM15.691 16.75l7.029 7.03a.75.75 0 0 0 1.06-1.06l-7.029-7.03a.75.75 0 0 0-1.06 1.06z">
+            </path>
+          </svg>
+        </button>
+      </form>
+      <div class="d-flex navElem flex-column align-items-center mx-3 pt-2" routerLink="/partner">
+        <svg focusable="false" fill="currentColor" height="20" width="20" role="presentation" fill="white"
+          viewBox="0 0 24 24" aria-hidden="true" slot="icon"
+          class="ext-action-menu__avatar--icon bk-icon -streamline-account_user">
+          <path
+            d="M16.5 9.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zm1.5 0a6 6 0 1 0-12 0 6 6 0 0 0 12 0zm1.445 10.597c-4.086-4.111-10.732-4.132-14.844-.046l-.046.046a.75.75 0 0 0 1.064 1.058l.04-.04a8.996 8.996 0 0 1 12.722.04.75.75 0 0 0 1.064-1.058zM22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12z">
+          </path>
+        </svg>
+        <h4 class="my-auto">Account</h4>
+      </div>
+      <div class="d-flex navElem flex-column align-items-center ml-3 pt-2" (click)="logout()">
+        <svg class="bk-icon -streamline-sign_out" height="20" width="20" viewBox="0 0 128 128" role="presentation"
+          fill="white" aria-hidden="true" focusable="false">
+          <path
+            d="M1.19 66.83l20 20a4.002 4.002 0 1 0 5.66-5.66L13.67 68H88a4 4 0 0 0 0-8H13.67l13.18-13.17a4.002 4.002 0 1 0-5.66-5.66l-20 20c-.183.186-.35.387-.5.6 0 0 0 .11-.08.16a3 3 0 0 0-.28.53 2.25 2.25 0 0 0-.08.24 3 3 0 0 0-.15.51 3.94 3.94 0 0 0 0 1.58c.036.174.086.344.15.51.022.081.049.162.08.24.076.182.17.357.28.52 0 .06.05.11.08.16.15.216.317.42.5.61zm31.13 35c20.876 19.722 53.787 18.787 73.509-2.089 14.874-15.743 18.432-39.058 8.931-58.521-10.77-22.12-42-37.41-69.52-24a52 52 0 0 0-12.91 8.93 4.004 4.004 0 0 1-5.49-5.83 60.002 60.002 0 0 1 14.9-10.29C67.26-2.37 106.48 6 122 37.74c14.519 29.787 2.142 65.704-27.645 80.223-22.44 10.938-49.308 6.839-67.465-10.293a4 4 0 0 1 5.48-5.82z">
+          </path>
+        </svg>
+        <h4 class="my-auto">Logout</h4>
+      </div>
+    </div>
+
+  </div>
+  <div class="container  d-flex justify-content-start ">
+    <div class="d-flex  flex-column align-items-center NavHover p-3 mr-1" routerLink="/grouphomepage"
+      routerLinkActive="active">
+
+      <h4 class="my-auto">Group homepage</h4>
+    </div>
+    <div class="d-flex  flex-column align-items-center NavHover p-3 mx-1" routerLink="/reviews"
+      routerLinkActive="active">
+
+      <h4 class="my-auto">Reviews</h4>
+    </div>
+    <div class="d-flex  flex-column align-items-center NavHover p-3 mx-1" routerLink="/reservations"
+      routerLinkActive="active">
+
+      <h4 class="my-auto">Reservations</h4>
+    </div>
+    <div class="d-flex  flex-column align-items-center NavHover p-3 mx-1" routerLink="/partner"
+      routerLinkActive="active">
+
+      <h4 class="my-auto">Account</h4>
+    </div>
+  </div>
+</header>
+
+
+
+
+
+<!-- <nav>
+  <div class="container ">
+    <div class="d-flex py-3 justify-content-between">
+      <h1>Booking.com</h1>
+      <div class="d-flex">
+        <input class="form-control me-3 search " type="search" placeholder="Search for reservation"
+          aria-label="Search ">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <svg cl xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+            class="bi bi-person-circle Acc pointer" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+          </svg>
+          <h4>Account</h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+ 
+ <nav class="nav naV ">
+   <div class="d-flex justify-content-between container my-2 flex-wrap">
+    <div>
+  <h3 class="text-light my-3 " >Booking.Com</h3>
+ </div>
+              
+     <div class="d-flex justify-content-end align-items-center flex-wrap"> 
+     <input class="form-control me-3 search " type="search" placeholder="Search for reservation" aria-label="Search " >
+ 
+     <h6 class="text-light text2">
+     <svg cl xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle Acc pointer" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+  
+</svg>
+      <span class="mx-1 pointer" routerLink="/partner" > Account</span> 
+</h6>
+
+<h6 class="text-light Properties" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-recycle Pro" viewBox="0 0 16 16">
+  <path d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242-2.532-4.431zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24l2.552-4.467zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.498.498 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244l-1.716-3.004z"/>
+</svg>
+    Properties</h6>
+
+   </div>
+   </div>
+ </nav>
+  
+ <nav class="navbar navbar-expand-lg navbar-light text-light naV mb-5">
+  <div class="container">
+      
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+            
+          <a class="nav-link  text-light NavHover"  routerLink="/grouphomepage" routerLinkActive="active" >Group homepage</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link text-light NavHover" routerLink="/reviews" routerLinkActive="active"  >Reviews </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light NavHover"  routerLink="/reservations" routerLinkActive="active">Reservations</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#">Group Opportunity Center</a>
+        </li>
+        
+         <li class="nav-item">
+          <a class="nav-link text-light" href="#">Bulk Editing <span class="badge bg-success">new</span>
+</a>
+        </li>
+
+
+
+
+  
+      </ul>
+    </div>
+    
+
+  </div>
+</nav>
+  -->

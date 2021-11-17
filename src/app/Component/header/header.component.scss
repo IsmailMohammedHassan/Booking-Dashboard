@@ -1,0 +1,52 @@
+$main: #003580;
+* {
+  // font: "Segoe UI";
+}
+.booking-header {
+}
+.view {
+  height: max-content;
+}
+.propName {
+  border-left: 1px solid white;
+}
+header {
+  background-color: $main;
+  color: white;
+  box-sizing: border-box !important;
+}
+.search-input {
+  background-color: #12499c !important;
+  ::placeholder {
+    color: white !important;
+  }
+}
+.nav-element:hover {
+  background-color: #1f53a2;
+  transition-duration: 0.2s;
+}
+.nav-element {
+  cursor: pointer;
+}
+footer {
+  background-color: $main;
+
+  margin-bottom: 0;
+  // width: 100%;
+  // height: 60px; /* Height of the footer */
+
+  color: white;
+}
+.NavHover:hover {
+  background-color: rgba(177, 177, 231, 0.103);
+}
+.NavHover {
+  cursor: pointer;
+}
+.active {
+  border-bottom: 3px solid #8fa9d1;
+  background-color: rgba(177, 177, 231, 0.103);
+}
+.navElem {
+  cursor: pointer;
+}
