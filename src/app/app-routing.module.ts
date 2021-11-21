@@ -1,3 +1,4 @@
+import { UserAuthGuard } from './Component/login/user-auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddPropertyHomePageComponent } from './Component/add-property-home-page/add-property-home-page.component';
@@ -11,20 +12,64 @@ import { PartnerComponent } from './Component/partner/partner.component';
 import { RegestertionComponent } from './Component/regestertion/regestertion.component';
 import { ReservationsComponent } from './Component/reservations/reservations.component';
 import { ReviewsComponent } from './Component/reviews/reviews.component';
+import { LoginAuthGuard } from './Component/login/login-auth.guard';
+import { GoogleDashboardComponent } from './Component/google-dashboard/google-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/grouphomepage', pathMatch: 'full' },
-  { path: 'grouphomepage', component: MainComponent },
-  { path: 'reviews', component: ReviewsComponent },
-  { path: 'reservations', component: ReservationsComponent },
-  { path: 'partner', component: PartnerComponent },
-  { path: 'add-property-home', component: AddPropertyHomePageComponent },
-  { path: 'add-new-hotel', component: HotelFormComponent },
-  { path: 'add-new-campground', component: CampgroundFormComponent },
-  { path: 'add-new-apartment', component: ApartmentFormComponent },
-  { path: 'complete', component: CompleteComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'registration', component: RegestertionComponent },
+  {
+    path: 'grouphomepage',
+    component: MainComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'reviews',
+    component: ReviewsComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'reservations',
+    component: ReservationsComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'partner',
+    component: PartnerComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'add-property-home',
+    component: AddPropertyHomePageComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'add-new-hotel',
+    component: HotelFormComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'add-new-campground',
+    component: CampgroundFormComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'add-new-apartment',
+    component: ApartmentFormComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'complete',
+    component: CompleteComponent,
+    canActivate: [UserAuthGuard],
+  },
+  { path: 'login', component: LoginComponent, canActivate: [LoginAuthGuard] },
+  { path: 'dashboard', component: GoogleDashboardComponent },
+
+  {
+    path: 'registration',
+    component: RegestertionComponent,
+    canActivate: [LoginAuthGuard],
+  },
 ];
 
 @NgModule({

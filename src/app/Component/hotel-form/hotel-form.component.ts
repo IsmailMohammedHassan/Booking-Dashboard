@@ -126,7 +126,7 @@ export class HotelFormComponent implements OnInit {
           const msg = 'Uploaded the file successfully: ' + file.name;
           this.message.push(msg);
           this.hotelImages.push(event.data[0]);
-          this.Hotel.value.images = this.hotelImages;
+
           console.log(this.Hotel.value);
         },
         (err: any) => {
@@ -165,6 +165,7 @@ export class HotelFormComponent implements OnInit {
     }
   }
   addHotel() {
+    this.Hotel.value.images = this.hotelImages;
     this.hotelService.creatHotel(this.Hotel.value).subscribe(
       (result) => {
         console.log(result);

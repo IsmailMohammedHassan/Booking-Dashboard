@@ -12,6 +12,8 @@ import { HotelService } from 'Services/hotel.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  isLoading = false;
+
   apart: Apartment[] = [];
   apartments: any[] = [];
 
@@ -31,27 +33,27 @@ export class MainComponent implements OnInit {
   ) {}
   campid: number[] = [];
   ngOnInit(): void {
+    this.isLoading = true;
     this.Apart.getApartmentsByUserId().subscribe((DATA) => {
       this.apartments = DATA.data;
+      this.isLoading = false;
     });
-
+    this.isLoading = true;
     this.hotelService.getHotelsByUserId().subscribe((DATA) => {
       this.hotelAny = DATA.data;
+      console.log(DATA);
       for (let i = 0; i < this.hotelAny.length; i++) {
         this.hotelService
           .getAllBookingsByHotelId(this.hotelAny[i]._id)
           .subscribe((result) => {
-            console.log(result);
             this.hotelBooking[i] = result.data.length;
           });
       }
-      console.log(this.hotelBooking);
 
-      // console.log(DATA);
-
-      //console.log(this.hotelAny);
+      this.isLoading = false;
     });
     //Camp
+    this.isLoading = true;
     this.campgroundService.getCampGroundsByUserId().subscribe((DATA) => {
       this.campgroundAny = DATA.data;
 
@@ -60,15 +62,13 @@ export class MainComponent implements OnInit {
           .getAllBookingsByCampGroundlID(this.campgroundAny[i]._id)
           .subscribe((DATA) => {
             this.campid[i] = DATA.data.length;
-            console.log('Camp =>', this.campid);
           });
       }
+      this.isLoading = false;
     });
   }
 
-  fun() {
-    console.log(this.campgroundAny);
-  }
+  fun() {}
   hotelRedirect(hotel: any) {
     window.location.href = `http://localhost:4401/home/hotel/${hotel._id}`;
   }

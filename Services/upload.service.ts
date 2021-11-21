@@ -12,6 +12,14 @@ export class UploadService {
       authentication: localStorage.getItem('authentication') || '',
     }),
   };
+  getImages(path: string): Observable<Blob> {
+    //console.log(environment.api_url+"/"+path);
+    //console.log("inside service api ");
+    return this.http.get(`${environment.Api}download/${path}`, {
+      responseType: 'blob',
+      headers: new HttpHeaders().append('content-type', 'application/json'),
+    });
+  }
 
   uploadImages(image: any): Observable<any> {
     return this.http.post<any>(

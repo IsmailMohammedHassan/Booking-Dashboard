@@ -1,10 +1,13 @@
-<div class="container my-5  bg-white p-3 rounded-3">
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center spinner">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading" class="container my-5 bg-white  p-3 rounded-3">
   <div class="d-flex my-3 flex-wrap">
     <h1 class="flex-grow-1">Group homepage</h1>
     <button class="btn btn-primary" routerLink="/add-property-home">Add New Property</button>
   </div>
 
-  <div *ngIf="apartments.length<=0&&campgroundAny.length<=0&&hotelAny.length<=0">
+  <div *ngIf="apartments.length<=0&&campgroundAny.length<=0&&hotelAny.length<=0 &&!isLoading">
     <div class="d-flex py-5 my-5 justify-content-lg-center align-items-center flex-column">
       <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="70px"
         fill="#888888" height="70px" class="bui-empty-state__icon">
@@ -18,103 +21,105 @@
 
   <div class="row ">
     <div class="col">
-
-      <ng-container *ngIf="apartments==[]">
-        <div style="overflow-x: auto" class="table-div">
-          <table>
-            <tr class="py-2">
-              <th>ID</th>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Status</th>
-
-              <th>Messages</th>
-              <th>Bookings</th>
-            </tr>
-
-            <tr *ngFor="let apartment of apartments; let i = index">
-              <td>{{i+1}}</td>
-              <td (click)="apartmentRedirect(apartment)">{{apartment.apartmentName }}</td>
-              <td>{{apartment.country}}/{{apartment.city}}</td>
-              <td>{{apartment.status}}</td>
-
-              <td>
-                <span class="badge rounded-circle bg-secondary">{{
-                  apartment.messages.length
-                  }}</span>
-              </td>
-              <td>
-                <span class="badge rounded-pill bg-secondary">{{
-                  apartment.bookings.length
-                  }}</span>
-              </td>
-            </tr>
-          </table>
-        </div>
+      <ng-container *ngIf="apartments!=[]&&!isLoading">
+        <h1>Apartments</h1>
+        <mat-card class="my-4 bg-light">
+          <div class="d-flex ">
+            <h3 class="col-2 fw-bold">#</h3>
+            <h3 class="col-2 fw-bold">Name</h3>
+            <h3 class="col-2 fw-bold">Location</h3>
+            <h3 class="col-2 fw-bold">Status</h3>
+            <h3 class="col-2 fw-bold">Messages</h3>
+            <h3 class="col-2 fw-bold">Bookings</h3>
+          </div>
+          <hr>
+          <ng-container class="overflow-scroll" *ngFor="let apartment of apartments; let i = index">
+            <mat-card class="my-2 p-0 matCard">
+              <div class="d-flex pt-4 align-items-center">
+                <h4 class="col-2"><img class="propImage" [src]="apartment.images[0]" alt=""></h4>
+                <h4 class="col-2" (click)="apartmentRedirect(apartment)">{{apartment.apartmentName }}</h4>
+                <h4 class="col-2">{{apartment.country}}/{{apartment.city}}</h4>
+                <h4 class="col-2">{{apartment.status}}</h4>
+                <h4 class="col-2">
+                  <span class="badge-rating">{{
+                    apartment.messages.length
+                    }}</span>
+                </h4>
+                <h4 class="col-2">
+                  <span class="badge-rating">{{
+                    apartment.bookings.length
+                    }}</span>
+                </h4>
+              </div>
+            </mat-card>
+          </ng-container>
+        </mat-card>
       </ng-container>
 
-      <br />
-      <ng-container *ngIf="hotelAny==[]">
-        <div style="overflow-x: auto" class="table-div">
-          <table>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Status</th>
-
-              <th>Messages</th>
-              <th>Bookings</th>
-            </tr>
-
-            <tr *ngFor="let hotel of hotelAny; let i = index">
-              <td>{{i+1}}</td>
-              <td (click)="hotelRedirect(hotel)">{{hotel.hotelName}}</td>
-              <td>{{hotel.country}}/{{hotel.city}}</td>
-              <td>{{hotel.status}}</td>
-
-              <td>
-                <span class="badge rounded-circle bg-secondary">{{
-                  hotel.messages.length
-                  }}</span>
-              </td>
-              <td>
-                <span class="badge rounded-circle bg-secondary">
-                  {{hotelBooking[i]}}
-                </span>
-              </td>
-            </tr>
-          </table>
-        </div>
+      <ng-container *ngIf="hotelAny!=[]&&!isLoading">
+        <h1>Hotels</h1>
+        <mat-card class="my-4 bg-light">
+          <div class="d-flex ">
+            <h3 class="col-2 fw-bold">#</h3>
+            <h3 class="col-2 fw-bold">Name</h3>
+            <h3 class="col-2 fw-bold">Location</h3>
+            <h3 class="col-2 fw-bold">Status</h3>
+            <h3 class="col-2 fw-bold">Messages</h3>
+            <h3 class="col-2 fw-bold">Bookings</h3>
+          </div>
+          <hr>
+          <ng-container *ngFor="let hotel of hotelAny; let i = index">
+            <mat-card class="my-2 p-0 matCard">
+              <div class="d-flex pt-4 align-items-center">
+                <h4 class="col-2"><img class="propImage" [src]="hotel.images[0]" alt=""></h4>
+                <h4 class="col-2" (click)="apartmentRedirect(hotel)">{{hotel.hotelName }}</h4>
+                <h4 class="col-2">{{hotel.country}}/{{hotel.city}}</h4>
+                <h4 class="col-2">{{hotel.status}}</h4>
+                <h4 class="col-2">
+                  <span class="badge-rating">{{
+                    hotel.messages.length
+                    }}</span>
+                </h4>
+                <h4 class="col-2">
+                  <span class="badge-rating"> {{hotelBooking[i]}}</span>
+                </h4>
+              </div>
+            </mat-card>
+          </ng-container>
+        </mat-card>
       </ng-container>
 
-      <br />
-      <ng-container *ngIf="campgroundAny==[]">
-        <div style="overflow-x: auto " class="table-div">
-          <table>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Status</th>
-
-              <th>Messages</th>
-              <th>Bookings</th>
-            </tr>
-
-            <tr *ngFor="let camp of campgroundAny; let i = index">
-              <td>{{i+1}}</td>
-              <td (click)="campRedirect(camp)">{{camp.campgroundName}}</td>
-              <td>{{camp.country}}/{{camp.city}}</td>
-              <td>{{camp.status}}</td>
-
-              <td><span class="badge rounded-circle bg-secondary">{{camp.messages?.length}}</span></td>
-              <td><span class="badge rounded-circle bg-secondary">{{campid[i]}}</span></td>
-
-            </tr>
-          </table>
-
-        </div>
+      <ng-container *ngIf="campgroundAny!=[]&&!isLoading">
+        <h1>Campgrounds</h1>
+        <mat-card class="my-4 bg-light">
+          <div class="d-flex align-items-center">
+            <h3 class="col-2 fw-bold">#</h3>
+            <h3 class="col-2 fw-bold">Name</h3>
+            <h3 class="col-2 fw-bold">Location</h3>
+            <h3 class="col-2 fw-bold">Status</h3>
+            <h3 class="col-2 fw-bold">Messages</h3>
+            <h3 class="col-2 fw-bold">Bookings</h3>
+          </div>
+          <hr>
+          <ng-container *ngFor="let camp of campgroundAny; let i = index">
+            <mat-card class="my-2 p-0 matCard">
+              <div class="d-flex pt-4">
+                <h4 class="col-2"><img class="propImage" [src]="camp.images[0]" alt=""></h4>
+                <h4 class="col-2" (click)="campRedirect(camp)">{{camp.campgroundName }}</h4>
+                <h4 class="col-2">{{camp.country}}/{{camp.city}}</h4>
+                <h4 class="col-2">{{camp.status}}</h4>
+                <h4 class="col-2">
+                  <span class="badge-rating">{{
+                    camp.messages.length
+                    }}</span>
+                </h4>
+                <h4 class="col-2">
+                  <span class="badge-rating"> {{campid[i]}}</span>
+                </h4>
+              </div>
+            </mat-card>
+          </ng-container>
+        </mat-card>
       </ng-container>
     </div>
   </div>

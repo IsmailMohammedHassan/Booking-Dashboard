@@ -367,8 +367,8 @@
                         </div>
 
                         <div class="col-4">
-                            <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="uploadFiles()">
-                                Upload
+                            <button class="btn btn-primary btn-sm" [disabled]="!selectedFiles" (click)="uploadFiles()">
+                                Add photos
                             </button>
                         </div>
 
@@ -417,7 +417,7 @@
                     <p>How many days in advance can guests cancel free of charge?</p>
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Cancellations</mat-label>
-                        <mat-select formControlName="cancellation">
+                        <mat-select formControlName="cancellationPolicy">
                             <mat-option value=1>1 Day</mat-option>
                             <mat-option value=2>2 Days</mat-option>
                             <mat-option value=3>3 Days</mat-option>

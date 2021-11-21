@@ -116,7 +116,7 @@ export class ApartmentFormComponent implements OnInit {
           const msg = 'Uploaded the file successfully: ' + file.name;
           this.message.push(msg);
           this.apartmentImages.push(event.data[0]);
-          this.Apartment.value.images = this.apartmentImages;
+
           console.log(this.Apartment.value);
         },
         (err: any) => {
@@ -154,6 +154,7 @@ export class ApartmentFormComponent implements OnInit {
     }
   }
   addApartment() {
+    this.Apartment.value.images = this.apartmentImages;
     this.apartmentService.creatApartment(this.Apartment.value).subscribe(
       (result) => {
         console.log(result);

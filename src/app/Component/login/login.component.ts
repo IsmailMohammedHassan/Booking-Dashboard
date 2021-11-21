@@ -11,9 +11,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   UserData: any = {};
+
   constructor(private userService: UserService, private router: Router) {}
   wrong: any;
   ngOnInit(): void {}
+
   login() {
     this.userService.LoginUser(this.UserData).subscribe((result) => {
       console.log('result', result);

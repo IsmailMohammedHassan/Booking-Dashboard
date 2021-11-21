@@ -53,9 +53,56 @@ td:first-child {
 }
 tr:not(:first-child) {
 }
-td:nth-child(2):hover {
+h4:nth-child(2):hover {
   cursor: pointer;
-  color: #8e9eab;
+  color: #003580;
   text-decoration: underline;
   font-weight: bold;
+}
+.badge-rating {
+  border-radius: 5.09091px 5.09091px 5.09091px 0;
+
+  width: 28px;
+
+  height: 28px;
+
+  font-size: 14px;
+
+  line-height: 20px;
+
+  font-weight: 500;
+
+  color: white;
+
+  background-color: #003580;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+
+  -webkit-box-pack: center;
+
+  -ms-flex-pack: center;
+
+  justify-content: center;
+
+  -webkit-box-align: center;
+
+  -ms-flex-align: center;
+
+  align-items: center;
+}
+.matCard:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition-duration: 0.3s;
+}
+.spinner {
+  height: 500px;
+}
+.propImage {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }

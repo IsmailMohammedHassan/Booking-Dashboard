@@ -45,7 +45,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 const matrials = [
   BrowserAnimationsModule,
   MatDatepickerModule,

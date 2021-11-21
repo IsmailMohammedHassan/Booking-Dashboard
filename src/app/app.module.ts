@@ -18,7 +18,16 @@ import { ApartmentFormComponent } from './Component/apartment-form/apartment-for
 import { CompleteComponent } from './Component/complete/complete.component';
 import { LoginComponent } from './Component/login/login.component';
 import { RegestertionComponent } from './Component/regestertion/regestertion.component';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
 
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from 'angularx-social-login';
+import { GoogleDashboardComponent } from './Component/google-dashboard/google-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +44,7 @@ import { RegestertionComponent } from './Component/regestertion/regestertion.com
     CompleteComponent,
     LoginComponent,
     RegestertionComponent,
+    GoogleDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +53,24 @@ import { RegestertionComponent } from './Component/regestertion/regestertion.com
     FormsModule,
     MatrialModule,
     ReactiveFormsModule,
+    SocialLoginModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '646600498472-ba82ab7qt0knnmcksvn4k4b01mkicdn6.apps.googleusercontent.com'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

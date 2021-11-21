@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CampgroundService } from '../../../../Services/campground.service';
@@ -19,11 +20,13 @@ export class CampgroundFormComponent implements OnInit {
   selectedFiles: any;
   previews!: any[];
   imageInfos?: Observable<any>;
+  images: any;
   constructor(
     private _formBuilder: FormBuilder,
     private upload: UploadService,
     private campgroundService: CampgroundService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
   Campground = this._formBuilder.group({
@@ -50,7 +53,7 @@ export class CampgroundFormComponent implements OnInit {
       accessibility: [''],
       entertainment: [''],
     }),
-    cancellation: [''],
+    cancellationPolicy: [''],
     checkIn: [''],
     checkOut: [''],
     children: [''],
@@ -94,6 +97,7 @@ export class CampgroundFormComponent implements OnInit {
 
   uploadImg(idx: number, file: File): void {
     this.progressInfos[idx] = { value: 0, fileName: file.name };
+
     const formData = new FormData();
 
     formData.append('multiple_images', file);
@@ -105,8 +109,6 @@ export class CampgroundFormComponent implements OnInit {
           const msg = 'Uploaded the file successfully: ' + file.name;
           this.message.push(msg);
           this.campgroundImages.push(event.data[0]);
-          this.Campground.value.images = this.campgroundImages;
-          console.log(this.Campground.value);
         },
         (err: any) => {
           console.log(err);
@@ -144,7 +146,9 @@ export class CampgroundFormComponent implements OnInit {
       }
     }
   }
+
   addCampground() {
+    this.Campground.value.images = this.campgroundImages;
     this.campgroundService.creatCampGround(this.Campground.value).subscribe(
       (result) => {
         console.log(result);
@@ -156,5 +160,13 @@ export class CampgroundFormComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.upload
+      .getImages('1637165347938-Kiss_The_Landscape_Part2_05.jpg')
+      .subscribe((img) => {
+        let unsafeImageUrl = URL.createObjectURL(img);
+        this.images = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
+        console.log(this.images);
+      });
+  }
 }

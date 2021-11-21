@@ -11,7 +11,7 @@
       <h4 class="my-4" style="color:#888888">No bookings</h4>
     </div>
   </div>
-  <ng-container *ngIf="allBookingHotels">
+  <ng-container *ngIf="allBookingHotels.length>0">
     <h2 class="text-end ">Hotels booking</h2>
     <div class="bg-white mb-3 rounded-3 p-3">
 
@@ -46,7 +46,7 @@
 
 
 
-  <ng-container *ngIf="bookingApart">
+  <ng-container *ngIf="bookingApart.length>0">
     <h2 class="text-end">Apartments booking</h2>
     <div class="bg-white mb-3 rounded-3 p-3">
 
@@ -80,7 +80,7 @@
 
 
 
-  <ng-container *ngIf="bookingApart">
+  <ng-container *ngIf="bookingApart.length>0">
     <h2 class="text-end">Campgrounds booking</h2>
     <div class="bg-white mb-3 rounded-3 p-3">
 
