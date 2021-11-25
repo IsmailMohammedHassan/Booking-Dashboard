@@ -1,0 +1,12 @@
+<div [ngClass]="{'notifiDiv':'user.notifications.length<=0'}" class="w-50 p-3 bg-white my-5 mx-5 ">
+    <ng-container *ngFor="let noifi of user.notifications">
+
+        <a [href]="noifi.link">
+            <div class="alert alert-primary notifi" role="alert">
+                {{noifi.body}}
+            </div>
+        </a>
+
+    </ng-container>
+
+</div>

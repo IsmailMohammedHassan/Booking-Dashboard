@@ -1,5 +1,13 @@
 .image {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 4px;
+  border-radius: 50%;
   height: 300px;
+  width: 300px;
+}
+.spinner {
+  height: 110%;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  background-color: rgba(105, 105, 105, 0.466);
 }

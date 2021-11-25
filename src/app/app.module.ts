@@ -28,6 +28,8 @@ import {
   FacebookLoginProvider,
 } from 'angularx-social-login';
 import { GoogleDashboardComponent } from './Component/google-dashboard/google-dashboard.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NotificationsComponent } from './Component/notifications/notifications.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,7 @@ import { GoogleDashboardComponent } from './Component/google-dashboard/google-da
     LoginComponent,
     RegestertionComponent,
     GoogleDashboardComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { GoogleDashboardComponent } from './Component/google-dashboard/google-da
     MatrialModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    FontAwesomeModule,
   ],
   providers: [
     {

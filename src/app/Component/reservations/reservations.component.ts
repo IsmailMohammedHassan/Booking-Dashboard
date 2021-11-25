@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { ApartmentService } from 'Services/apartment.service';
 import { CampgroundService } from 'Services/campground.service';
 import { HotelService } from 'Services/hotel.service';
@@ -12,11 +17,11 @@ export class ReservationsComponent implements OnInit {
   hotels: any[] = [];
   allBookingHotels: any[] = [];
   HotelsBookings: any[] = [];
-
+  panelOpenState = false;
   apart: any[] = [];
   allAparBooking: any[] = [];
   bookingApart: any[] = [];
-
+  isLoading: any = false;
   camp: any[] = [];
   allCampBooking: any[] = [];
   CampgroundBookings: any[] = [];
@@ -28,9 +33,9 @@ export class ReservationsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.hotelService.getHotelsByUserId().subscribe((Res) => {
       this.hotels = Res.data;
-
       for (let i = 0; i < this.hotels.length; i++) {
         this.hotelService
           .getAllBookingsByHotelId(this.hotels[i]._id)
@@ -38,16 +43,17 @@ export class ReservationsComponent implements OnInit {
             this.allBookingHotels[i] = res.data;
             this.HotelsBookings = [].concat(...this.allBookingHotels);
           });
+        this.isLoading = false;
       }
     });
 
     this.apartSerice.getApartmentsByUserId().subscribe((Res) => {
       this.apart = Res.data;
-      console.log(this.apart);
+
       for (let i = 0; i < this.apart.length; i++) {
         this.bookingApart[i] = this.apart[i].bookings;
-        console.log(this.bookingApart);
       }
+      this.isLoading = false;
     });
 
     this.campService.getCampGroundsByUserId().subscribe((Res) => {
@@ -59,7 +65,7 @@ export class ReservationsComponent implements OnInit {
           .subscribe((res) => {
             this.allCampBooking[i] = res.data;
             this.CampgroundBookings = [].concat(...this.allCampBooking);
-            //  console.log('ground', this.CampgroundBookings);
+            this.isLoading = false;
           });
       }
     });

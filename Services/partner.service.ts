@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'model/user';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -45,9 +45,11 @@ export class PartnerService {
     return this.http.get<any>(environment.Api + 'user', this.httpOptions);
   }
   getLoggedUser(): Observable<any> {
-    return this.http.get<any>(environment.Api + 'user/loggedin', this.httpOptions);
+    return this.http.get<any>(
+      environment.Api + 'user/loggedin',
+      this.httpOptions
+    );
   }
-
 
   getUserById(userId: any): Observable<any> {
     return this.http.get<any>(

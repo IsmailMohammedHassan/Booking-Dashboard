@@ -22,19 +22,34 @@ import { UploadService } from '../../../../Services/upload.service';
 export class HotelFormComponent implements OnInit {
   result: any;
   Hotel = this._formBuilder.group({
-    hotelName: ['', Validators.required],
-    starRating: ['', Validators.required],
-    phone: ['', Validators.required],
+    hotelName: [
+      '',
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(50),
+    ],
+    starRating: ['', Validators.required, Validators.min(1), Validators.max(7)],
+    phone: [
+      '',
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(12),
+    ],
     country: ['', Validators.required],
     city: ['', Validators.required],
     streetAddress: ['', Validators.required],
     zipCode: ['', Validators.required],
-    cancellation: [''],
-    checkIn: [''],
-    checkOut: [''],
-    children: [''],
-    pets: [''],
-    paymentOption: [''],
+    cancellation: ['', Validators.required],
+    checkIn: ['', Validators.required],
+    checkOut: ['', Validators.required],
+    children: ['', Validators.required],
+    pets: ['', Validators.required],
+    paymentOption: [
+      '',
+      Validators.required,
+      Validators.minLength(16),
+      Validators.maxLength(16),
+    ],
     facilities: this._formBuilder.group({
       parking: ['', Validators.required],
       breakfast: ['', Validators.required],
@@ -166,6 +181,7 @@ export class HotelFormComponent implements OnInit {
   }
   addHotel() {
     this.Hotel.value.images = this.hotelImages;
+    console.log(this.Hotel.value);
     this.hotelService.creatHotel(this.Hotel.value).subscribe(
       (result) => {
         console.log(result);

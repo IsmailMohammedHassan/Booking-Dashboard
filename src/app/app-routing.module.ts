@@ -1,3 +1,4 @@
+import { NotificationsComponent } from './Component/notifications/notifications.component';
 import { UserAuthGuard } from './Component/login/user-auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -55,6 +56,11 @@ const routes: Routes = [
   {
     path: 'add-new-apartment',
     component: ApartmentFormComponent,
+    canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
     canActivate: [UserAuthGuard],
   },
   {

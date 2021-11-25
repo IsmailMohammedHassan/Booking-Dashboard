@@ -1,3 +1,6 @@
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center spinner">
+  <mat-spinner></mat-spinner>
+</div>
 <div class="main-content">
   <div class="container">
     <div class="row">
@@ -86,9 +89,24 @@
           </div> -->
           <div class="content">
             <div class="author p-3">
-              <img class="w-100 rounded-circle p-2 image" src="assets/photo-1604223190546-a43e4c7f29d7.jpg" alt=""
-                srcset="">
-              <h4 class="title my-auto py-4">
+              <ng-container *ngIf="previews.length<=0">
+                <div class="d-flex justify-content-center">
+                  <img class="mt-2 image mx-auto" [src]="admin.personalImage" alt="" srcset="">
+
+                </div>
+              </ng-container>
+              <div class="d-flex justify-content-center">
+                <img class="image mx-auto" *ngFor='let preview of previews' [src]="preview">
+              </div>
+              <div class="col-8 my-3">
+                <label class="btn btn-default p-0">
+                  <input required type="file" name="multiple_images" accept="image/*" (change)="selectFiles($event)" />
+                </label>
+              </div>
+
+
+
+              <h4 class="title my-3 ">
                 <input type="text" class="form-control" name="ttta" placeholder="username" [(ngModel)]="admin.username"
                   [value]="admin.username" />
               </h4>

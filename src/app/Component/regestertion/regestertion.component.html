@@ -14,29 +14,24 @@
           <div class="card fat">
             <div class="card-body">
               <h2 class="card-title text-center">Registeration</h2>
-              <div class="alert-success p-2 mt-2 rounded-2 my-2" *ngIf="success">
-                {{success}}
-              </div>
 
-              <div class="alert-danger p-2 mt-2 rounded-2 my-2" *ngIf="wrong">
-                {{wrong}}
-              </div>
               <mat-stepper orientation="vertical">
-                <form class="my-login-validation" novalidate="" (ngSubmit)="registration()" #ngForm="ngForm">
+                <form class="my-login-validation" novalidate="" #ngForm="ngForm">
                   <mat-step>
                     <ng-template matStepLabel>Main information</ng-template>
 
                     <div class="my-1">
                       <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Username</mat-label>
-                        <input name="username" required autofocus #username="ngModel" [(ngModel)]="UserData.username"
-                          matInput>
+                        <input type="text" name="username" required autofocus #username="ngModel"
+                          [(ngModel)]="UserData.username" matInput>
                       </mat-form-field>
                     </div>
                     <div class="my-1">
                       <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Email</mat-label>
-                        <input name="email" required #email="ngModel" [(ngModel)]="UserData.email" matInput>
+                        <input type="email" name="email" required #email="ngModel" [(ngModel)]="UserData.email"
+                          matInput>
                       </mat-form-field>
                     </div>
                     <div class="my-1">
@@ -83,9 +78,16 @@
 
                       <div class="my-1">
                         <mat-form-field class="w-100" appearance="outline">
-                          <mat-label>Nationality</mat-label>
-                          <input required #nationality="ngModel" name="nationality" matInput placeholder="Ex. Egypt"
-                            [(ngModel)]="UserData.nationality">
+                          <mat-label>Country</mat-label>
+                          <input required #country="ngModel" name="country" matInput placeholder="Ex. Egypt"
+                            [(ngModel)]="UserData.country">
+                        </mat-form-field>
+                      </div>
+                      <div class="my-1">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>City</mat-label>
+                          <input required #city="ngModel" name="city" matInput placeholder="Ex. Egypt"
+                            [(ngModel)]="UserData.city">
                         </mat-form-field>
                       </div>
 
@@ -115,7 +117,7 @@
                     <div>
                       <button mat-button matStepperPrevious>Back</button>
                       <button mat-button matStepperNext
-                        [disabled]="birthday.invalid||phone.invalid||firstName.invalid||lastName.invalid||nationality.invalid||birthday.invalid">Next</button>
+                        [disabled]="birthday.invalid||phone.invalid||firstName.invalid||lastName.invalid||city.invalid||country.invalid||birthday.invalid">Next</button>
                     </div>
                   </mat-step>
                   <mat-step>
@@ -162,6 +164,13 @@
 
                 </form>
               </mat-stepper>
+              <div class="alert-success p-2 mt-2 rounded-2 my-2" *ngIf="success">
+                {{success}}
+              </div>
+
+              <div class="alert-danger p-2 mt-2 rounded-2 my-2" *ngIf="wrong">
+                {{wrong}}
+              </div>
               <div class="mt-4 text-center">
                 Already have an account? <a routerLink="/login">Login</a>
               </div>

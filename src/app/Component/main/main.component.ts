@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Apartment } from 'model/apartment';
 import { CampGround } from 'model/campGround';
 import { Hotel } from 'model/hotel';
@@ -31,6 +31,7 @@ export class MainComponent implements OnInit {
     private hotelService: HotelService,
     private campgroundService: CampgroundService
   ) {}
+
   campid: number[] = [];
   ngOnInit(): void {
     this.isLoading = true;
@@ -38,7 +39,7 @@ export class MainComponent implements OnInit {
       this.apartments = DATA.data;
       this.isLoading = false;
     });
-    this.isLoading = true;
+
     this.hotelService.getHotelsByUserId().subscribe((DATA) => {
       this.hotelAny = DATA.data;
       console.log(DATA);
@@ -48,12 +49,11 @@ export class MainComponent implements OnInit {
           .subscribe((result) => {
             this.hotelBooking[i] = result.data.length;
           });
+        this.isLoading = false;
       }
-
-      this.isLoading = false;
     });
     //Camp
-    this.isLoading = true;
+
     this.campgroundService.getCampGroundsByUserId().subscribe((DATA) => {
       this.campgroundAny = DATA.data;
 
@@ -63,8 +63,8 @@ export class MainComponent implements OnInit {
           .subscribe((DATA) => {
             this.campid[i] = DATA.data.length;
           });
+        this.isLoading = false;
       }
-      this.isLoading = false;
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ApartmentService } from 'Services/apartment.service';
 import { CampgroundService } from 'Services/campground.service';
 import { HotelService } from 'Services/hotel.service';
@@ -14,6 +14,9 @@ export class ReviewsComponent implements OnInit {
     private hotelService: HotelService,
     private campService: CampgroundService
   ) {}
+
+  isLoading = false;
+  panelOpenState = false;
   apartments: any[] = [];
   apartmentReviews: any[] = [];
   allApartmentReviews: any[] = [];
@@ -27,30 +30,33 @@ export class ReviewsComponent implements OnInit {
   allCamplReviews: any[] = [];
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.Apart.getApartmentsByUserId().subscribe((DATA) => {
       this.apartments = DATA.data;
-      console.log(this.apartments);
+
       for (let i = 0; i < this.apartments.length; i++) {
         this.Apart.getAllReviewsByApartmentId(this.apartments[i]._id).subscribe(
           (res) => {
             this.apartmentReviews[i] = res.data;
-            console.log(this.apartmentReviews);
+
+            this.isLoading = false;
           }
         );
       }
     });
 
     // HotelReview
+
     this.hotelService.getHotelsByUserId().subscribe((Res) => {
       this.allHotels = Res.data;
-      // console.log(this.allHotels);
+
       for (let i = 0; i < this.allHotels.length; i++) {
         this.hotelService
           .getAllReviewsByHotelId(this.allHotels[i]._id)
           .subscribe((result) => {
             this.HotelReviews[i] = result.data;
-            // this.allHotelReviews = [].concat(...this.HotelReviews);
-            // console.log(this.allHotelReviews);
+
+            this.isLoading = false;
           });
       }
     });
@@ -59,26 +65,16 @@ export class ReviewsComponent implements OnInit {
 
     this.campService.getCampGroundsByUserId().subscribe((Res) => {
       this.allCamp = Res.data;
+
       for (let i = 0; i < this.allCamp.length; i++) {
         this.campService
           .getAllReviewsByCampGroundId(this.allCamp[i]._id)
           .subscribe((result) => {
             this.campReviews[i] = result.data;
-            // this.allCamplReviews = [].concat(...this.campReviews);
-            // console.log(this.allCamplReviews);
+            console.log(this.campReviews);
+            this.isLoading = false;
           });
       }
     });
   }
 }
-
-// for (let i = 0; i < this.apartments.length; i++) {
-//   this.Apart.getAllReviewsByApartmentId(this.apartments[i]._id).subscribe(
-//     (res) => {
-//       this.apartmentReviews[i] = res.data;
-//       // console.log('object', this.apartmentReviews);
-//       this.allApartmentReviews = [].concat(...this.apartmentReviews);
-//      console.log(this.allApartmentReviews);
-//     }
-//   );
-// }

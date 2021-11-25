@@ -1,6 +1,9 @@
-<div class="container my-4">
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center spinner">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="w-50 p-3 bg-white my-5 mx-5">
   <h1>Properties Booking</h1>
-  <div *ngIf="allBookingHotels.length<=0">
+  <div *ngIf="apart.length<=0&&hotels.length<=0&&camp.length<=0&&!isLoading ">
     <div class="d-flex py-5 my-5 justify-content-lg-center align-items-center flex-column">
       <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="70px"
         fill="#888888" height="70px" class="bui-empty-state__icon">
@@ -8,107 +11,157 @@
           d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z">
         </path>
       </svg>
-      <h4 class="my-4" style="color:#888888">No bookings</h4>
+      <h4 class="my-4" style="color:#888888">No bookings yet</h4>
     </div>
   </div>
-  <ng-container *ngIf="allBookingHotels.length>0">
-    <h2 class="text-end ">Hotels booking</h2>
-    <div class="bg-white mb-3 rounded-3 p-3">
+  <ng-container *ngIf="apart.length!=0&&bookingApart.length!=0">
+    <mat-card class="bg-light mb-5">
+      <h2>Apartments</h2>
+      <ng-container *ngFor="let apartment of apart ; let i = index">
+        <div class="mb-3">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel-header class="py-2">
+                <mat-panel-title class="align-items-center col-6">
+                  <mat-panel-title class="align-items-center  py-1">
+                    <img class="propImage m-3" [src]="apartment.images[0]" alt="" srcset="">
+                    {{apartment.apartmentName}}
+                  </mat-panel-title>
+                </mat-panel-title>
+                <mat-panel-description class="align-items-center  ">
+                  <p>{{apartment.bookings.length}} Bookings</p>
+                </mat-panel-description>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Hotel name</th>
-            <th scope="col">Guest name</th>
-            <th scope="col">Check in</th>
-            <th scope="col">Check out</th>
-            <th scope="col">Total price</th>
+              </mat-expansion-panel-header>
+              <ng-container *ngFor="let booking of bookingApart[i]">
+                <div class="bg-light rounded-2 p-2 mt-2">
+                  <div class="d-flex container align-items-center mt-3 mb-2">
+                    <img class="propImage" [src]="booking.guestId.personalImage" alt="" srcset="">
+                    <div class="mx-2 mt-2">
+                      <p class=" m-0 ">{{booking.guestId.username}}</p>
+                      <p class=" ">{{booking.createdAt | date:'medium'}}</p>
+                    </div>
 
-          </tr>
-        </thead>
-        <tbody *ngFor="let hotel of hotels ; let i = index">
 
-          <ng-container *ngFor="let booking of allBookingHotels[i]">
-            <tr>
-              <td> {{hotel.hotelName}}</td>
-              <td>{{booking.guestId}}</td>
-              <td>{{booking.startAt | date:'mediumDate'}}</td>
-              <td>{{booking.endAt | date:'mediumDate'}}</td>
-              <td>{{booking.totalPrice}}</td>
+                  </div>
+                  <hr>
+                  <div class="d-flex container justify-content-between">
+                    <div>
+                      <p>From: <span class="fw-bold text-secondary"> {{booking.startAt | date:'mediumDate'}}</span></p>
+                      <p>To: <span class="fw-bold text-secondary"> {{booking.endAt | date:'mediumDate'}}</span></p>
+                    </div>
+                    <div>
+                      <p>Number of Guests: <span class="fw-bold text-secondary"> {{booking.guestsNum}}</span></p>
+                      <p>Price: <span class="fw-bold text-secondary"> {{booking.totalPrice}}$</span></p>
+                    </div>
+                  </div>
 
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
+                </div>
+              </ng-container>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </ng-container>
+
+    </mat-card>
+  </ng-container>
+  <ng-container *ngIf="hotels.length!=0">
+    <mat-card class="bg-light mb-5">
+      <h2>Hotels</h2>
+      <ng-container *ngFor="let hotel of hotels ; let i = index">
+        <div class="mb-3">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center col-6">
+                  <mat-panel-title class="align-items-center  py-1">
+                    <img class="propImage m-3" [src]="hotel.images[0]" alt="" srcset="">
+                    {{hotel.hotelName}}
+                  </mat-panel-title>
+                </mat-panel-title>
+                <mat-panel-description class="align-items-center  ">
+                  <p>{{allBookingHotels[i]?.length}} Bookings</p>
+                </mat-panel-description>
+
+              </mat-expansion-panel-header>
+              <ng-container *ngFor="let booking of allBookingHotels[i]">
+                <div class="bg-light rounded-2 p-2 mt-2">
+                  <div class="d-flex container align-items-center mt-3 mb-2">
+                    <img class="propImage" [src]="booking.guestId.personalImage" alt="" srcset="">
+                    <div class="mx-2 mt-2">
+                      <p class="m-0 ">{{booking.guestId.username}}</p>
+                      <p class="">{{booking.createdAt | date:'medium'}}</p>
+                    </div>
+
+                  </div>
+                  <hr>
+                  <div class="d-flex container justify-content-between">
+                    <div>
+                      <p>From: <span class="fw-bold text-secondary"> {{booking.startAt | date:'mediumDate'}}</span></p>
+                      <p>To: <span class="fw-bold text-secondary"> {{booking.endAt | date:'mediumDate'}}</span></p>
+                    </div>
+                    <div>
+                      <p>Number of Guests: <span class="fw-bold text-secondary"> {{booking.guestsNum}}</span></p>
+                      <p>Price: <span class="fw-bold text-secondary"> {{booking.totalPrice}}$</span></p>
+                    </div>
+                  </div>
+
+                </div>
+              </ng-container>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </ng-container>
+    </mat-card>
   </ng-container>
 
+  <ng-container *ngIf="camp.length!=0">
+    <mat-card class="bg-light mb-5">
+      <h2>Campgrounds</h2>
+      <ng-container *ngFor="let campground of camp ; let i = index">
+        <div class="mb-3">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center col-6">
+                  <mat-panel-title class="align-items-center  py-1">
+                    <img class="propImage m-3" [src]="campground.images[0]" alt="" srcset="">
+                    {{campground.campgroundName}}
+                  </mat-panel-title>
+                </mat-panel-title>
+                <mat-panel-description class="align-items-center  ">
+                  <p>{{allCampBooking[i]?.length}} Bookings</p>
+                </mat-panel-description>
 
+              </mat-expansion-panel-header>
+              <ng-container *ngFor="let booking of allCampBooking[i]">
+                <div class="bg-light rounded-2 p-2 mt-2">
+                  <div class="d-flex container align-items-center mt-3 mb-2">
+                    <img class="propImage" [src]="booking.guestId.personalImage" alt="" srcset="">
+                    <div class="mx-2 mt-2">
+                      <p class="m-0 ">{{booking.guestId.username}}</p>
+                      <p>{{booking.createdAt | date:'medium'}}</p>
+                    </div>
 
+                  </div>
+                  <hr>
+                  <div class="d-flex container justify-content-between">
+                    <div>
+                      <p>From: <span class="fw-bold text-secondary"> {{booking.startAt | date:'mediumDate'}}</span></p>
+                      <p>To: <span class="fw-bold text-secondary"> {{booking.endAt | date:'mediumDate'}}</span></p>
+                    </div>
+                    <div>
+                      <p>Number of Guests: <span class="fw-bold text-secondary"> {{booking.guestsNum}}</span></p>
+                      <p>Price: <span class="fw-bold text-secondary"> {{booking.totalPrice}}$</span></p>
+                    </div>
+                  </div>
+                </div>
 
-  <ng-container *ngIf="bookingApart.length>0">
-    <h2 class="text-end">Apartments booking</h2>
-    <div class="bg-white mb-3 rounded-3 p-3">
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Apartment name</th>
-            <th>Guest name</th>
-            <th>Check in</th>
-            <th>Check out</th>
-            <th>Total price</th>
-
-          </tr>
-        </thead>
-        <tbody *ngFor="let apartment of apart ; let i = index">
-
-          <ng-container *ngFor="let booking of bookingApart[i]">
-            <tr>
-              <td> {{apartment.apartmentName}}</td>
-              <td>{{booking.guestId}}</td>
-              <td>{{booking.startAt | date:'mediumDate'}}</td>
-              <td>{{booking.endAt | date:'mediumDate'}}</td>
-              <td>{{booking.totalPrice}}</td>
-
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
-  </ng-container>
-
-
-
-  <ng-container *ngIf="bookingApart.length>0">
-    <h2 class="text-end">Campgrounds booking</h2>
-    <div class="bg-white mb-3 rounded-3 p-3">
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Campground name</th>
-            <th>Guest name</th>
-            <th>Check in</th>
-            <th>Check out</th>
-            <th>Total price</th>
-
-          </tr>
-        </thead>
-        <tbody *ngFor="let campground of camp ; let i = index">
-
-          <ng-container *ngFor="let booking of allCampBooking[i]">
-            <tr>
-              <td> {{campground.campgroundName}}</td>
-              <td>{{booking.guestId}}</td>
-              <td>{{booking.startAt | date:'mediumDate'}}</td>
-              <td>{{booking.endAt | date:'mediumDate'}}</td>
-              <td>{{booking.totalPrice}}</td>
-
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
+              </ng-container>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </ng-container>
+    </mat-card>
   </ng-container>
 </div>

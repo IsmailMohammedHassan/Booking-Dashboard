@@ -14,6 +14,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class RegestertionComponent implements OnInit {
   UserData: any = {};
+
   success: any;
   wrong: any;
   constructor(
@@ -28,43 +29,43 @@ export class RegestertionComponent implements OnInit {
   onCountrySelected(country: Country) {
     console.log(country);
   }
-  registration() {
-    if (this.UserData.type == 'partner') {
-      this.register.creatPartner(this.UserData).subscribe((partner) => {
-        if (partner.success) {
-          console.log(partner);
-          this.success =
-            'Congratiolations, registration completed please login';
-          setTimeout(() => {
-            // this.router.navigate(['/login']);
-          }, 2000);
-        }
-        if (!partner.success) {
-          console.log(partner);
-          this.wrong = 'Invalid credintials';
-        }
-      });
-    }
+  // registration() {
+  //   if (this.UserData.type == 'partner') {
+  //     this.register.creatPartner(this.UserData).subscribe((partner) => {
+  //       if (partner.success) {
+  //         console.log(partner);
+  //         this.success =
+  //           'Congratiolations, registration completed please login';
+  //         setTimeout(() => {
+  //           // this.router.navigate(['/login']);
+  //         }, 1000);
+  //       }
+  //       if (!partner.success) {
+  //         console.log(partner);
+  //         this.wrong = 'Invalid credintials';
+  //       }
+  //     });
+  //   }
 
-    if (this.UserData.type == 'user') {
-      this.register.creatUser(this.UserData).subscribe((user) => {
-        if (user.success) {
-          console.log(user);
-          this.success =
-            'Congratiolations, registration completed please login';
-          setTimeout(() => {
-            //   this.router.navigate(['/login']);
-          }, 2000);
-        }
-        if (!user.success) {
-          console.log(user);
-          this.wrong = 'Invalid credintials';
-        }
-      });
-    }
+  //   if (this.UserData.type == 'user') {
+  //     this.register.creatUser(this.UserData).subscribe((user) => {
+  //       if (user.success) {
+  //         console.log(user);
+  //         this.success =
+  //           'Congratiolations, registration completed please login';
+  //         setTimeout(() => {
+  //           // this.router.navigate(['/login']);
+  //         }, 1000);
+  //       }
+  //       if (!user.success) {
+  //         console.log(user);
+  //         this.wrong = 'Invalid credintials';
+  //       }
+  //     });
+  //   }
 
-    console.log(this.UserData);
-  }
+  //   console.log(this.UserData);
+  // }
   partnerCheck() {
     this.UserData.type = 'partner';
   }
@@ -91,17 +92,17 @@ export class RegestertionComponent implements OnInit {
     if (file) {
       this.upload.uploadImages(formData).subscribe(
         (event: any) => {
+          console.log(event);
           this.UserData.personalImage = event.data[0];
           console.log(this.UserData);
           if (this.UserData.type == 'partner') {
             this.register.creatPartner(this.UserData).subscribe((partner) => {
               if (partner.success) {
                 console.log(partner);
-                this.success =
-                  'Congratiolations, registration completed please login';
+                this.success = 'Registration completed please login';
                 setTimeout(() => {
                   this.router.navigate(['/login']);
-                }, 2000);
+                }, 1000);
               }
               if (!partner.success) {
                 console.log(partner);
@@ -119,7 +120,7 @@ export class RegestertionComponent implements OnInit {
                 this.wrong = false;
                 setTimeout(() => {
                   this.router.navigate(['/login']);
-                }, 2000);
+                }, 1000);
               }
               if (!user.success) {
                 console.log(user);
