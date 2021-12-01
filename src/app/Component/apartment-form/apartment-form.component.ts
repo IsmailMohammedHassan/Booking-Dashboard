@@ -71,11 +71,11 @@ export class ApartmentFormComponent implements OnInit {
     events: ['', Validators.required],
     smoking: ['', Validators.required],
     description: ['', Validators.required],
-  
+
     facilities: this._formBuilder.group({
       general: ['', Validators.required],
       cookingAndCleaening: ['', Validators.required],
-      Entertainment: ['', Validators.required],
+      entertainment: ['', Validators.required],
       view: ['', Validators.required],
     }),
 
