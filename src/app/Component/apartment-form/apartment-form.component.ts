@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ApartmentService } from '../../../../Services/apartment.service';
 import { UploadService } from '../../../../Services/upload.service';
+import { catchError, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-apartment-form',
@@ -21,14 +23,35 @@ export class ApartmentFormComponent implements OnInit {
   apartmentImages: any[] = [];
   panelOpenState = false;
   panelOpenState2 = false;
-  imageInfos?: Observable<any>;
-
+  imageInfos: any[] = [];
+  apiLoaded!: Observable<boolean>;
   constructor(
     private _formBuilder: FormBuilder,
     private upload: UploadService,
     private apartmentService: ApartmentService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private httpClient: HttpClient
+  ) {
+    this.apiLoaded = httpClient
+      .jsonp(
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD017M6hIYH7wqssOlEDzwzKApuA6VrAVE',
+        'callback'
+      )
+      .pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
+  }
+  center: google.maps.LatLngLiteral = { lat: 25, lng: 29 };
+  zoom = 5;
+  markerOptions: google.maps.MarkerOptions = { draggable: false };
+  markerPositions!: google.maps.LatLngLiteral;
+
+  addMarker(event: google.maps.MapMouseEvent) {
+    this.markerPositions = event.latLng!.toJSON();
+    console.log(this.markerPositions);
+  }
+
   Apartment = this._formBuilder.group({
     apartmentName: ['', Validators.required],
     phone: ['', Validators.required],
@@ -43,10 +66,12 @@ export class ApartmentFormComponent implements OnInit {
     checkOut: ['', Validators.required],
     cancellation: ['', Validators.required],
     price: ['', Validators.required],
-    pets: [''],
-    children: [''],
-    events: [''],
-    smoking: [''],
+    pets: ['', Validators.required],
+    children: ['', Validators.required],
+    events: ['', Validators.required],
+    smoking: ['', Validators.required],
+    description: ['', Validators.required],
+  
     facilities: this._formBuilder.group({
       general: ['', Validators.required],
       cookingAndCleaening: ['', Validators.required],
@@ -54,9 +79,9 @@ export class ApartmentFormComponent implements OnInit {
       view: ['', Validators.required],
     }),
 
-    size: [''],
-    guestsNum: [''],
-    bathRooms: [''],
+    size: ['', Validators.required],
+    guestsNum: ['', Validators.required],
+    bathRooms: ['', Validators.required],
     bedRooms: this._formBuilder.array([this.addBedRooms()]),
     livingRooms: this._formBuilder.array([this.addLivingRooms()]),
   });
@@ -102,6 +127,15 @@ export class ApartmentFormComponent implements OnInit {
   addLivingRoom() {
     this.livingRooms.push(this.addLivingRooms());
   }
+  deleteImage(index: number) {
+    for (let i = 0; i < this.imageInfos.length; i++) {
+      if (index == i) {
+        this.imageInfos.splice(i, 1);
+        this.message.splice(i, 1);
+        this.progressInfos.splice(i, 1);
+      }
+    }
+  }
 
   uploadImg(idx: number, file: File): void {
     this.progressInfos[idx] = { value: 0, fileName: file.name };
@@ -116,8 +150,9 @@ export class ApartmentFormComponent implements OnInit {
           const msg = 'Uploaded the file successfully: ' + file.name;
           this.message.push(msg);
           this.apartmentImages.push(event.data[0]);
+          this.imageInfos.push(event.data[0]);
 
-          console.log(this.Apartment.value);
+          this.previews = [];
         },
         (err: any) => {
           console.log(err);
@@ -154,7 +189,8 @@ export class ApartmentFormComponent implements OnInit {
     }
   }
   addApartment() {
-    this.Apartment.value.images = this.apartmentImages;
+    this.Apartment.value.images = this.imageInfos;
+    this.Apartment.value.location = this.markerPositions;
     this.apartmentService.creatApartment(this.Apartment.value).subscribe(
       (result) => {
         console.log(result);

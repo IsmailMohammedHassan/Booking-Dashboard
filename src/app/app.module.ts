@@ -22,13 +22,14 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
-
+import { GoogleMapsModule } from '@angular/google-maps';
 import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from 'angularx-social-login';
 import { GoogleDashboardComponent } from './Component/google-dashboard/google-dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { NotificationsComponent } from './Component/notifications/notifications.component';
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NotificationsComponent } from './Component/notifications/notifications.
     NotificationsComponent,
   ],
   imports: [
+    GoogleMapsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

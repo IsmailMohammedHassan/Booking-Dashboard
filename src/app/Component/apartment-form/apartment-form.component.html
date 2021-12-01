@@ -1,7 +1,6 @@
 <div class="bg-light h-100 w-100">
-    <form [formGroup]="Apartment">
-
-        <mat-horizontal-stepper class="bg-light">
+    <mat-horizontal-stepper class="bg-light">
+        <form [formGroup]="Apartment">
             <mat-step label="Name & Location">
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5">
                     <mat-form-field type="text" class="w-100" appearance="fill">
@@ -17,6 +16,10 @@
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label>City</mat-label>
                         <input matInput placeholder="Ex. Qena" formControlName="city">
+                    </mat-form-field>
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>streetAddress</mat-label>
+                        <input matInput placeholder="Ex. Qena" formControlName="streetAddress">
                     </mat-form-field>
 
                     <mat-form-field class="w-100" appearance="fill">
@@ -40,8 +43,23 @@
                     </mat-form-field>
 
                 </div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
+                    <div class="w-100">
+                        <google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
+                            <map-marker [position]="markerPositions!" [options]="markerOptions"></map-marker>
+                        </google-map>
+                    </div>
+
+                </div>
+                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
+                    <mat-form-field class="example-full-width w-100" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName="description" matInput></textarea>
+                    </mat-form-field>
+                </div>
+
+                <button mat-button matStepperNext
+                    [disabled]="Apartment.controls['apartmentName'].invalid||Apartment.controls['country'].invalid||Apartment.controls['city'].invalid||Apartment.controls['zipCode'].invalid||Apartment.controls['homeNumber'].invalid||Apartment.controls['apartmentNumber'].invalid||Apartment.controls['description'].invalid||Apartment.controls['phone'].invalid">Next</button>
             </mat-step>
             <mat-step label="Property setup">
 
@@ -239,8 +257,10 @@
                     </mat-form-field>
                 </div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext
+                    [disabled]="Apartment.controls['bedRooms'].invalid||Apartment.controls['livingRooms'].invalid||Apartment.controls['size'].invalid||Apartment.controls['bathRooms'].invalid||Apartment.controls['guestsNum'].invalid">Next</button>
             </mat-step>
+
             <mat-step label="Facilities " formGroupName="facilities">
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5 ">
                     <h2>What can guests use at your place?</h2>
@@ -282,7 +302,7 @@
                     </mat-selection-list>
                 </div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext [disabled]="Apartment.controls['facilities'].invalid">Next</button>
             </mat-step>
             <mat-step label="Photos">
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5 imagesPage">
@@ -325,28 +345,24 @@
                             </ul>
                         </div>
 
-                        <div class="card mt-3">
+                        <div class="card mt-3 w-100 p-0" *ngIf="imageInfos.length>0">
                             <div class="card-header">List of Images</div>
-                            <ul class="list-group list-group-flush" *ngFor="let image of imageInfos | async">
-                                <li class="list-group-item">
-                                    <p><a href="{{ image.url }}">{{ image.name }}</a></p>
-                                    <img src="{{ image.url }}" alt="{{ image.name }}" />
+                            <ul class="list-group list-group-flush" *ngFor="let image of imageInfos;let i = index ">
+                                <li class="list-group-item ">
+
+
+                                    <mat-icon color="warn" class="deleteImage" aria-hidden="false"
+                                        (click)="deleteImage(i)" aria-label="Example home icon">delete
+                                    </mat-icon>
+
+                                    <img class="preview" src="{{ image }}" />
+
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="progress">
 
-                        <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
-                            *ngIf="uploadProgress">
-
-                        </mat-progress-bar>
-
-                        <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever
-                        </mat-icon>
-
-                    </div>
 
 
                 </div>
@@ -415,15 +431,16 @@
 
                 </div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext
+                    [disabled]="Apartment.controls['smoking'].invalid||Apartment.controls['pets'].invalid||Apartment.controls['cancellation'].invalid||Apartment.controls['smoking'].invalid||Apartment.controls['children'].invalid||Apartment.controls['checkIn'].invalid||Apartment.controls['checkOut'].invalid||Apartment.controls['events'].invalid">Next</button>
             </mat-step>
             <mat-step label="Complete">
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5 ">
 
-                    <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-form-field appearance="fill" floatLabel="always" class="w-100">
                         <mat-label>Price</mat-label>
                         <input matInput type="number" formControlName="price" class="example-right-align w-100"
-                            placeholder="0">
+                            placeholder="Per day">
                         <span matPrefix>$&nbsp;</span>
                         <span matSuffix>.00</span>
                     </mat-form-field>
@@ -437,7 +454,9 @@
                         type="submit">Complete
                         registration</button>
                 </div>
+                <button mat-button matStepperPrevious>Back</button>
             </mat-step>
-        </mat-horizontal-stepper>
-    </form>
+        </form>
+    </mat-horizontal-stepper>
+
 </div>

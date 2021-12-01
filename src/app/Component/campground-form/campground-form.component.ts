@@ -1,10 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CampgroundService } from '../../../../Services/campground.service';
 import { UploadService } from '../../../../Services/upload.service';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-campground-form',
@@ -19,15 +21,36 @@ export class CampgroundFormComponent implements OnInit {
   campgroundImages: any[] = [];
   selectedFiles: any;
   previews!: any[];
-  imageInfos?: Observable<any>;
+  imageInfos: any[] = [];
   images: any;
+  apiLoaded!: Observable<boolean>;
   constructor(
     private _formBuilder: FormBuilder,
     private upload: UploadService,
     private campgroundService: CampgroundService,
     private router: Router,
-    private sanitizer: DomSanitizer
-  ) {}
+    private sanitizer: DomSanitizer,
+    private httpClient: HttpClient
+  ) {
+    this.apiLoaded = httpClient
+      .jsonp(
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD017M6hIYH7wqssOlEDzwzKApuA6VrAVE',
+        'callback'
+      )
+      .pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
+  }
+  center: google.maps.LatLngLiteral = { lat: 25, lng: 29 };
+  zoom = 5;
+  markerOptions: google.maps.MarkerOptions = { draggable: false };
+  markerPositions!: google.maps.LatLngLiteral;
+
+  addMarker(event: google.maps.MapMouseEvent) {
+    this.markerPositions = event.latLng!.toJSON();
+    console.log(this.markerPositions);
+  }
 
   Campground = this._formBuilder.group({
     campgroundName: ['', Validators.required],
@@ -36,6 +59,7 @@ export class CampgroundFormComponent implements OnInit {
     zipCode: ['', Validators.required],
     phone: ['', Validators.required],
     streetAddress: ['', Validators.required],
+    description: ['', Validators.required],
     facilities: this._formBuilder.group({
       parking: ['', Validators.required],
       breakfast: ['', Validators.required],
@@ -44,21 +68,21 @@ export class CampgroundFormComponent implements OnInit {
       popularFacilities: ['', Validators.required],
     }),
     amenities: this._formBuilder.group({
-      room: [''],
-      food: [''],
-      bathroom: [''],
-      media: [''],
-      services: [''],
-      view: [''],
-      accessibility: [''],
-      entertainment: [''],
+      room: ['', Validators.required],
+      food: ['', Validators.required],
+      bathroom: ['', Validators.required],
+      media: ['', Validators.required],
+      services: ['', Validators.required],
+      view: ['', Validators.required],
+      accessibility: ['', Validators.required],
+      entertainment: ['', Validators.required],
     }),
-    cancellationPolicy: [''],
-    checkIn: [''],
-    checkOut: [''],
-    children: [''],
-    pets: [''],
-    paymentOption: [''],
+    cancellation: ['', Validators.required],
+    checkIn: ['', Validators.required],
+    checkOut: ['', Validators.required],
+    children: ['', Validators.required],
+    pets: ['', Validators.required],
+    paymentOption: ['', Validators.required],
     rooms: this._formBuilder.array([this.addRooms()]),
   });
 
@@ -68,17 +92,17 @@ export class CampgroundFormComponent implements OnInit {
 
   addRooms() {
     return this._formBuilder.group({
-      roomName: [''],
-      type: [''],
-      customName: [''],
-      numOfRoomOfThisType: [''],
-      roomSize: [''],
-      price: [''],
-      bedType: [''],
-      bedsNumber: [''],
-      guestsNumber: [''],
+      roomName: ['', Validators.required],
+      type: ['', Validators.required],
+      customName: ['', Validators.required],
+      numOfRoomOfThisType: ['', Validators.required],
+      roomSize: ['', Validators.required],
+      price: ['', Validators.required],
+      bedType: ['', Validators.required],
+      bedsNumber: ['', Validators.required],
+      guestsNumber: ['', Validators.required],
       available: [true],
-      smoking: [''],
+      smoking: ['', Validators.required],
     });
   }
 
@@ -93,6 +117,15 @@ export class CampgroundFormComponent implements OnInit {
 
   reset() {
     this.uploadProgress = 0;
+  }
+  deleteImage(index: number) {
+    for (let i = 0; i < this.imageInfos.length; i++) {
+      if (index == i) {
+        this.imageInfos.splice(i, 1);
+        this.message.splice(i, 1);
+        this.progressInfos.splice(i, 1);
+      }
+    }
   }
 
   uploadImg(idx: number, file: File): void {
@@ -109,6 +142,8 @@ export class CampgroundFormComponent implements OnInit {
           const msg = 'Uploaded the file successfully: ' + file.name;
           this.message.push(msg);
           this.campgroundImages.push(event.data[0]);
+          this.imageInfos.push(event.data[0]);
+          this.previews = [];
         },
         (err: any) => {
           console.log(err);
@@ -148,11 +183,13 @@ export class CampgroundFormComponent implements OnInit {
   }
 
   addCampground() {
-    this.Campground.value.images = this.campgroundImages;
+    this.Campground.value.images = this.imageInfos;
+    this.Campground.value.location = this.markerPositions;
     this.campgroundService.creatCampGround(this.Campground.value).subscribe(
       (result) => {
         console.log(result);
         if (result.success == true) this.router.navigate(['/complete/']);
+        else alert(result.msg);
       },
       (err) => {
         console.log(err);
@@ -160,13 +197,5 @@ export class CampgroundFormComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    this.upload
-      .getImages('1637165347938-Kiss_The_Landscape_Part2_05.jpg')
-      .subscribe((img) => {
-        let unsafeImageUrl = URL.createObjectURL(img);
-        this.images = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
-        console.log(this.images);
-      });
-  }
+  ngOnInit(): void {}
 }

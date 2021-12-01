@@ -1,6 +1,7 @@
 <div class="bg-light h-100 w-100">
-    <form [formGroup]="Campground">
-        <mat-horizontal-stepper class="bg-light">
+
+    <mat-horizontal-stepper class="bg-light">
+        <form [formGroup]="Campground">
             <mat-step label="Basic Info">
 
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5">
@@ -12,6 +13,20 @@
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Phone Number</mat-label>
                         <input type="tel" matInput placeholder="Ex. 010***" formControlName="phone">
+                    </mat-form-field>
+                </div>
+                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
+                    <div class="w-100">
+                        <google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
+                            <map-marker [position]="markerPositions!" [options]="markerOptions"></map-marker>
+                        </google-map>
+                    </div>
+
+                </div>
+                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
+                    <mat-form-field class="example-full-width w-100" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName="description" matInput></textarea>
                     </mat-form-field>
                 </div>
 
@@ -35,8 +50,9 @@
                     </mat-form-field>
                 </div>
 
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+
+                <button mat-button matStepperNext
+                    [disabled]="Campground.controls['campgroundName'].invalid&&Campground.controls['zipCode'].invalid&&Campground.controls['city'].invalid&&Campground.controls['streetAddress'].invalid&&Campground.controls['description'].invalid&&Campground.controls['phone'].invalid">Next</button>
             </mat-step>
 
             <mat-step label="Layout & Pricing">
@@ -84,9 +100,12 @@
                                 <mat-label>Room size</mat-label>
                                 <input matInput type="number" placeholder="Ex. 20 meter" formControlName="roomSize">
                             </mat-form-field>
-                            <mat-form-field class="w-100" appearance="fill">
+                            <mat-form-field appearance="fill" floatLabel="always" class="w-100">
                                 <mat-label>Price</mat-label>
-                                <input matInput type="number" placeholder="Ex. 65311" formControlName="price">
+                                <input matInput type="number" formControlName="price" class="example-right-align w-100"
+                                    placeholder="Per day">
+                                <span matPrefix>$&nbsp;</span>
+                                <span matSuffix>.00</span>
                             </mat-form-field>
                             <hr>
                             <h2>Bed Options</h2>
@@ -135,7 +154,7 @@
 
 
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext [disabled]="Campground.controls['rooms'].invalid">Next</button>
             </mat-step>
             <mat-step label="Facilities & Services" formGroupName="facilities">
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5">
@@ -198,7 +217,7 @@
 
                 </div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext [disabled]="Campground.controls['facilities'].invalid">Next</button>
             </mat-step>
 
             <mat-step label="Amenities" formGroupName="amenities">
@@ -339,7 +358,7 @@
                     </mat-form-field>
                 </div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext [disabled]="Campground.controls['amenities'].invalid">Next</button>
             </mat-step>
 
             <mat-step label="Photos">
@@ -383,28 +402,24 @@
                             </ul>
                         </div>
 
-                        <div class="card mt-3">
+                        <div class="card mt-3 w-100 p-0" *ngIf="imageInfos.length>0">
                             <div class="card-header">List of Images</div>
-                            <ul class="list-group list-group-flush" *ngFor="let image of imageInfos | async">
-                                <li class="list-group-item">
-                                    <p><a href="{{ image.url }}">{{ image.name }}</a></p>
-                                    <img src="{{ image.url }}" alt="{{ image.name }}" />
+                            <ul class="list-group list-group-flush" *ngFor="let image of imageInfos;let i = index ">
+                                <li class="list-group-item ">
+
+
+                                    <mat-icon color="warn" class="deleteImage" aria-hidden="false"
+                                        (click)="deleteImage(i)" aria-label="Example home icon">delete
+                                    </mat-icon>
+
+                                    <img class="preview" src="{{ image }}" />
+
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="progress">
 
-                        <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
-                            *ngIf="uploadProgress">
-
-                        </mat-progress-bar>
-
-                        <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever
-                        </mat-icon>
-
-                    </div>
 
 
                 </div>
@@ -413,11 +428,11 @@
             </mat-step>
             <mat-step label="Policies">
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5">
-                    <h1>Cancellations</h1>
+                    <h1>Cancellation</h1>
                     <p>How many days in advance can guests cancel free of charge?</p>
                     <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Cancellations</mat-label>
-                        <mat-select formControlName="cancellationPolicy">
+                        <mat-label>Cancellation</mat-label>
+                        <mat-select formControlName="cancellation">
                             <mat-option value=1>1 Day</mat-option>
                             <mat-option value=2>2 Days</mat-option>
                             <mat-option value=3>3 Days</mat-option>
@@ -464,7 +479,8 @@
 
 
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext
+                    [disabled]="Campground.controls['cancellation'].invalid&&Campground.controls['pets'].invalid&&Campground.controls['children'].invalid&&Campground.controls['checkIn'].invalid&&Campground.controls['checkOut'].invalid">Next</button>
             </mat-step>
 
             <mat-step label="Complete">
@@ -474,11 +490,13 @@
                         <input matInput formControlName="paymentOption">
                     </mat-form-field>
                     <button (click)="addCampground()" mat-flat-button color="primary" class="w-100"
-                        type="submit">Complete
+                        [disabled]="Campground.invalid" type="submit">Complete
                         registration</button>
 
                 </div>
+                <button mat-button matStepperPrevious>Back</button>
             </mat-step>
-        </mat-horizontal-stepper>
-    </form>
+        </form>
+    </mat-horizontal-stepper>
+
 </div>

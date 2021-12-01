@@ -1,4 +1,4 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -9,9 +9,10 @@ import {
 } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { HotelService } from '../../../../Services/hotel.service';
 import { UploadService } from '../../../../Services/upload.service';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotel-form',
@@ -36,6 +37,7 @@ export class HotelFormComponent implements OnInit {
       Validators.maxLength(12),
     ],
     country: ['', Validators.required],
+    description: ['', Validators.required],
     city: ['', Validators.required],
     streetAddress: ['', Validators.required],
     zipCode: ['', Validators.required],
@@ -58,14 +60,14 @@ export class HotelFormComponent implements OnInit {
       popularFacilities: ['', Validators.required],
     }),
     amenities: this._formBuilder.group({
-      room: [''],
-      food: [''],
-      bathroom: [''],
-      media: [''],
-      services: [''],
-      view: [''],
-      accessibility: [''],
-      entertainment: [''],
+      room: ['', Validators.required],
+      food: ['', Validators.required],
+      bathroom: ['', Validators.required],
+      media: ['', Validators.required],
+      services: ['', Validators.required],
+      view: ['', Validators.required],
+      accessibility: ['', Validators.required],
+      entertainment: ['', Validators.required],
     }),
     rooms: this._formBuilder.array([this.addRooms()]),
   });
@@ -80,36 +82,60 @@ export class HotelFormComponent implements OnInit {
   message: string[] = [];
   uploadAvailable: boolean = true;
   previews: string[] = [];
-  imageInfos?: Observable<any>;
+  imageInfos: any[] = [];
+
   constructor(
     private _formBuilder: FormBuilder,
     private upload: UploadService,
     private hotelService: HotelService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private httpClient: HttpClient
+  ) {
+    this.apiLoaded = httpClient
+      .jsonp(
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD017M6hIYH7wqssOlEDzwzKApuA6VrAVE',
+        'callback'
+      )
+      .pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
+  }
+
+  center: google.maps.LatLngLiteral = { lat: 25, lng: 29 };
+  zoom = 5;
+  markerOptions: google.maps.MarkerOptions = { draggable: false };
+  markerPositions!: google.maps.LatLngLiteral;
+
+  addMarker(event: google.maps.MapMouseEvent) {
+    this.markerPositions = event.latLng!.toJSON();
+    console.log(this.markerPositions);
+  }
+
+  apiLoaded!: Observable<boolean>;
+  click(event: google.maps.MapMouseEvent) {
+    console.log(event);
+  }
 
   ngOnInit() {}
-  click() {
-    console.log(this.Hotel.value);
-  }
 
   get rooms() {
     return this.Hotel.controls['rooms'] as FormArray;
   }
   addRooms() {
     return this._formBuilder.group({
-      roomName: [''],
-      type: [''],
-      customName: [''],
-      numOfRoomOfThisType: [''],
-      roomSize: [''],
-      price: [''],
-      bedType: [''],
-      bedsNumber: [''],
-      guestsNumber: [''],
-      facilities: [''],
+      roomName: ['', Validators.required],
+      type: ['', Validators.required],
+      customName: ['', Validators.required],
+      numOfRoomOfThisType: ['', Validators.required],
+      roomSize: ['', Validators.required],
+      price: ['', Validators.required],
+      bedType: ['', Validators.required],
+      bedsNumber: ['', Validators.required],
+      guestsNumber: ['', Validators.required],
+      facilities: ['', Validators.required],
       available: [true],
-      smoking: [''],
+      smoking: ['', Validators.required],
     });
   }
   onSave() {
@@ -141,8 +167,9 @@ export class HotelFormComponent implements OnInit {
           const msg = 'Uploaded the file successfully: ' + file.name;
           this.message.push(msg);
           this.hotelImages.push(event.data[0]);
+          this.imageInfos.push(event.data[0]);
 
-          console.log(this.Hotel.value);
+          this.previews = [];
         },
         (err: any) => {
           console.log(err);
@@ -179,16 +206,27 @@ export class HotelFormComponent implements OnInit {
       }
     }
   }
+  deleteImage(index: number) {
+    for (let i = 0; i < this.imageInfos.length; i++) {
+      if (index == i) {
+        this.imageInfos.splice(i, 1);
+        this.message.splice(i, 1);
+        this.progressInfos.splice(i, 1);
+      }
+    }
+  }
   addHotel() {
-    this.Hotel.value.images = this.hotelImages;
+    this.Hotel.value.images = this.imageInfos;
+    this.Hotel.value.location = this.markerPositions;
     console.log(this.Hotel.value);
     this.hotelService.creatHotel(this.Hotel.value).subscribe(
       (result) => {
         console.log(result);
         if (result.success == true) this.router.navigate(['/complete/']);
+        else alert(result.msg);
       },
       (err) => {
-        console.log(err);
+        alert(err);
       }
     );
   }
