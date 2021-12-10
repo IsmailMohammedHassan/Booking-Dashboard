@@ -4,6 +4,7 @@ import { CampGround } from 'model/campGround';
 import { Reviews } from 'model/reviews';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Messages} from '../model/messages';
 
 @Injectable({
   providedIn: 'root',
@@ -91,10 +92,50 @@ export class CampgroundService {
       this.httpOptions
     );
   }
+  getAllReviewsByCampId(campID: any): Observable<any> {
+    return this.http.get<any>(
+      environment.Api + 'campground/review/' + campID,
+      this.httpOptions
+    );
+  }
 
+  // msg
+  getAllMessagesByCampGroundId(campID: any): Observable<any> {
+    return this.http.get<any>(
+      environment.Api + 'campground/message/' + campID,
+      this.httpOptions
+    );
+  }
+  createMessage(campID: any, message: Messages): Observable<any> {
+    return this.http.post<any>(
+      environment.Api + 'campground/message/' + campID,
+      message,
+      this.httpOptions
+    );
+  }
+  deleteMessage(campID: any, messageId: any): Observable<any> {
+    return this.http.delete<any>(
+      environment.Api + 'campground/message/' + campID + '/' + messageId,
+      this.httpOptions
+    );
+  }
 
-
-
-
-  
+  updateMessage(
+    campID: any,
+    messageId: any,
+    message: Messages
+  ): Observable<any> {
+    return this.http.put<any>(
+      environment.Api + 'campground/message/' + campID + '/' + messageId,
+      message,
+      this.httpOptions
+    );
+  }
+  createReplay(propId: any, messageId: any, replay: any): Observable<any> {
+    return this.http.post<any>(
+      environment.Api + 'campground/message/replay/' + propId + '/' + messageId,
+      replay,
+      this.httpOptions
+    );
+  }
 }

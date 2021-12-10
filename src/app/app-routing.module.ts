@@ -15,6 +15,13 @@ import { ReservationsComponent } from './Component/reservations/reservations.com
 import { ReviewsComponent } from './Component/reviews/reviews.component';
 import { LoginAuthGuard } from './Component/login/login-auth.guard';
 import { GoogleDashboardComponent } from './Component/google-dashboard/google-dashboard.component';
+import { PropertyComponent } from './property/property/property.component';
+import { HomeComponent } from './property/Component/home/home.component';
+import { PropertySettingsComponent } from './property/Component/property-settings/property-settings/property-settings.component';
+import { CampgroundSettingsComponent } from './property/Component/campground-settings/campground-settings.component';
+import { ApartmentSettingComponent } from './property/Component/apartment-setting/apartment-setting/apartment-setting.component';
+import { TransactionsComponent } from './property/Component/transactions/transactions.component';
+import { InboxComponent } from './property/Component/inbox/inbox.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/grouphomepage', pathMatch: 'full' },
@@ -76,7 +83,65 @@ const routes: Routes = [
     component: RegestertionComponent,
     canActivate: [LoginAuthGuard],
   },
+
+  {
+    path: 'property',
+    component: PropertyComponent,
+    children: [
+      {
+        path: 'apart',
+        component: ApartmentSettingComponent,
+      },
+      {
+        path: 'home/:prop/:id',
+        component: HomeComponent,
+
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'complete',
+        component: CompleteComponent,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'inbox/:prop/:id',
+        component: InboxComponent,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'bookings/:prop/:id',
+        component: ReservationsComponent,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'reviews/:prop/:id',
+        component: ReviewsComponent,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'settings/hotel/:id',
+        component: PropertySettingsComponent,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'settings/campground/:id',
+        component: CampgroundSettingsComponent,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'settings/apartment/:id',
+        component: ApartmentSettingComponent,
+        canActivate: [UserAuthGuard],
+      },
+      {
+        path: 'transactions/:prop/:id',
+        component: TransactionsComponent,
+        canActivate: [UserAuthGuard],
+      },
+    ],
+  },
 ];
+ 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

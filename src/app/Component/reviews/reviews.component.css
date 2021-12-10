@@ -1,0 +1,49 @@
+.WidthInput {
+  width: 300px;
+}
+
+.btn1 {
+  width: 120px;
+  border-radius: 0%;
+  height: 40px;
+  margin-left: 20px;
+}
+
+.badge-rating {
+  border-radius: 5.09091px 5.09091px 5.09091px 0;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: white;
+  background-color: #003580;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 9px;
+}
+
+.personal-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.spinner {
+  height: 500px;
+}
+
+.propImage {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+/*# sourceMappingURL=reviews.component.css.map */

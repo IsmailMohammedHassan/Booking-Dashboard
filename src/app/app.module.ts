@@ -29,8 +29,8 @@ import {
 } from 'angularx-social-login';
 import { GoogleDashboardComponent } from './Component/google-dashboard/google-dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { NotificationsComponent } from './Component/notifications/notifications.component';
+import { PropertyModule } from './property/property.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +60,7 @@ import { NotificationsComponent } from './Component/notifications/notifications.
     ReactiveFormsModule,
     SocialLoginModule,
     FontAwesomeModule,
+    PropertyModule,
   ],
   providers: [
     {

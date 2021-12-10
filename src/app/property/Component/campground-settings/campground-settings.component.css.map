@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACP,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,KAAK;EACb,UAAU,EAAE,mBAAmB,CAAC,MAAM,CAAC,MAAM,CAAC,KAAK;EACnD,aAAa,EAAE,GAAG;CACnB;;AACD,AAAA,YAAY,CAAC;EACX,MAAM,EAAE,OAAO;CAChB;;AACD,AAAA,QAAQ,CAAC;EACP,MAAM,EAAE,KAAK;CACd",
+    "sources": [
+        "campground-settings.component.scss"
+    ],
+    "names": [],
+    "file": "campground-settings.component.css"
+}

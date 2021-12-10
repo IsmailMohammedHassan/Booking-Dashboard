@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,aAAa,EAAE,GAAG;EAClB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;CACb;;AACD,AAAA,QAAQ,CAAC;EACP,MAAM,EAAE,KAAK;CACd",
+    "sources": [
+        "reservations.component.scss"
+    ],
+    "names": [],
+    "file": "reservations.component.css"
+}

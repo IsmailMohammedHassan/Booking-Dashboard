@@ -7,11 +7,14 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private userService: PartnerService) {}
+  
+  constructor(private userService: PartnerService) {
+     
+  }
   faBell = faBell;
-
   notifi: any = 0;
   ngOnInit(): void {
+    
     this.userService.getLoggedUser().subscribe((data) => {
       this.notifi = data.data.notifications.length;
     });
@@ -20,4 +23,5 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     window.location.href = 'http://localhost:4200/login';
   }
+ 
 }

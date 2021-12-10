@@ -1,0 +1,70 @@
+.view {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.propName {
+  border-left: 1px solid white;
+}
+
+header {
+  background-color: #003580;
+  color: white;
+  -webkit-box-sizing: border-box !important;
+          box-sizing: border-box !important;
+}
+
+.search-input {
+  background-color: #12499c !important;
+}
+
+.search-input ::-webkit-input-placeholder {
+  color: white !important;
+}
+
+.search-input :-ms-input-placeholder {
+  color: white !important;
+}
+
+.search-input ::-ms-input-placeholder {
+  color: white !important;
+}
+
+.search-input ::placeholder {
+  color: white !important;
+}
+
+.nav-element:hover {
+  background-color: #1f53a2;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+}
+
+.nav-element {
+  cursor: pointer;
+}
+
+footer {
+  background-color: #003580;
+  margin-bottom: 0;
+  color: white;
+}
+
+.NavHover:hover {
+  background-color: rgba(177, 177, 231, 0.103);
+}
+
+.NavHover {
+  cursor: pointer;
+}
+
+.active {
+  border-bottom: 3px solid #8fa9d1;
+  background-color: rgba(177, 177, 231, 0.103);
+}
+
+.navElem {
+  cursor: pointer;
+}
+/*# sourceMappingURL=header.component.css.map */

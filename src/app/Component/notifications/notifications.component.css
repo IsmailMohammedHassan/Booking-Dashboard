@@ -1,0 +1,18 @@
+.notifi {
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.notifi:hover {
+  cursor: pointer;
+  -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.notifiDiv {
+  height: 385px;
+  overflow-y: scroll;
+}
+/*# sourceMappingURL=notifications.component.css.map */

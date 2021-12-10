@@ -1,0 +1,93 @@
+body {
+  background-color: #f7f7f7;
+}
+
+.btn1 {
+  background-color: #003580;
+  color: white;
+  margin-right: 20px;
+  height: 40px;
+}
+
+.ms {
+  margin-left: 28px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-of-type(odd) {
+  margin: 10px 0;
+  color: black;
+  background: #8e9eab;
+  background: -webkit-gradient(linear, left top, right top, from(#eef2f3), to(#ffffff));
+  background: linear-gradient(to right, #eef2f3, #ffffff);
+}
+
+td {
+  width: 15%;
+  padding: 20px 15px;
+}
+
+td:first-child {
+  width: 5%;
+}
+
+h4:nth-child(2):hover {
+  cursor: pointer;
+  color: #003580;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.badge-rating {
+  border-radius: 5.09091px 5.09091px 5.09091px 0;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: white;
+  background-color: #003580;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.matCard:hover {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.spinner {
+  height: 500px;
+}
+
+.propImage {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+/*# sourceMappingURL=main.component.css.map */
