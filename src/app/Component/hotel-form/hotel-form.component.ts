@@ -29,7 +29,7 @@ export class HotelFormComponent implements OnInit {
       Validators.minLength(4),
       Validators.maxLength(50),
     ],
-    starRating: ['', Validators.required, Validators.min(1), Validators.max(7)],
+    starRating: ['', Validators.required],
     phone: [
       '',
       Validators.required,

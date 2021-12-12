@@ -1,79 +1,317 @@
-<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center spinner">
-    <mat-spinner></mat-spinner>
+<div
+  *ngIf="isLoading"
+  class="d-flex justify-content-center align-items-center spinner"
+>
+  <mat-spinner></mat-spinner>
 </div>
 <div class="container py-5" *ngIf="!isLoading">
-    <h1 class="mb-4" *ngIf="bookings.length>0">Reservations</h1>
-    <div *ngIf="bookings.length>0" class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" class="w-100 ">
+  <h1 class="mb-4" *ngIf="bookings.length > 0">Reservations</h1>
+  <div *ngIf="bookings.length > 0" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="w-100">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Guest name</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.guestId.username }}
+        </td>
+      </ng-container>
 
+      <!-- Weight Column -->
+      <ng-container matColumnDef="startAt">
+        <th mat-header-cell *matHeaderCellDef>Check in</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.startAt | date: "mediumDate" }}
+        </td>
+      </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Guest name</th>
-                <td mat-cell *matCellDef="let element"> {{element.guestId.username}} </td>
-            </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="endAt">
+        <th mat-header-cell *matHeaderCellDef>Check out</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.endAt | date: "mediumDate" }}
+        </td>
+      </ng-container>
 
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Booked on</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdAt | date: "mediumDate" }}
+        </td>
+      </ng-container>
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="startAt">
-                <th mat-header-cell *matHeaderCellDef> Check in </th>
-                <td mat-cell *matCellDef="let element"> {{element.startAt| date:'mediumDate'}} </td>
-            </ng-container>
+      <ng-container matColumnDef="totalPrice">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalPrice }}</td>
+      </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="endAt">
-                <th mat-header-cell *matHeaderCellDef> Check out </th>
-                <td mat-cell *matCellDef="let element"> {{element.endAt | date:'mediumDate'}} </td>
-            </ng-container>
+      <ng-container matColumnDef="days">
+        <th mat-header-cell *matHeaderCellDef>Days</th>
+        <td mat-cell *matCellDef="let element">{{ element.days }}</td>
+      </ng-container>
+      <ng-container matColumnDef="cancel">
+        <th mat-header-cell *matHeaderCellDef>Cancel</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>cancel</mat-icon>
 
-            <ng-container matColumnDef="createdAt">
-                <th mat-header-cell *matHeaderCellDef> Booked on </th>
-                <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'mediumDate'}} </td>
-            </ng-container>
+              <span mat-stroked-button (click)="openSnackBar(element._id)">
+                Ask guest to cancel</span
+              >
+            </button>
+            <button
+              (click)="getRoomData(element)"
+              mat-menu-item
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <mat-icon>details</mat-icon>
 
-            <ng-container matColumnDef="totalPrice">
-                <th mat-header-cell *matHeaderCellDef> Price </th>
-                <td mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
-            </ng-container>
+              <span>Details</span>
+            </button>
+          </mat-menu>
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div
+                  class="
+                    modal-body
+                    d-flex
+                    justify-content-around
+                    align-items-between
+                  "
+                  style="height: 400px"
+                >
+                  <div class="d-flex flex-column justify-content-between h-100">
+                    <div>
+                      <div>
+                        <span class="fw-bold">First Name:</span>
+                      </div>
+                    </div>
 
-            <ng-container matColumnDef="days">
-                <th mat-header-cell *matHeaderCellDef> Days </th>
-                <td mat-cell *matCellDef="let element"> {{element.days}} </td>
-            </ng-container>
-            <ng-container matColumnDef="cancel">
-                <th mat-header-cell *matHeaderCellDef> Cancel </th>
-                <td mat-cell *matCellDef="let element"> <button mat-icon-button [matMenuTriggerFor]="menu"
-                        aria-label="Example icon-button with a menu">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-                            <mat-icon>cancel</mat-icon>
+                    <div>
+                      <div>
+                        <span class="fw-bold">Last Name:</span>
+                      </div>
+                    </div>
 
-                            <span mat-stroked-button (click)="openSnackBar(element._id)"> Ask
-                                guest to cancel</span>
+                    <div>
+                      <div>
+                        <span class="fw-bold">Full Name:</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div><span class="fw-bold">Email:</span></div>
+                    </div>
 
+                    <div>
+                      <div>
+                        <span class="fw-bold">For Work:</span>
+                      </div>
+                    </div>
 
-                        </button>
-                    </mat-menu>
-                </td>
-            </ng-container>
+                    <div>
+                      <div>
+                        <span class="fw-bold">Canceltion:</span>
+                      </div>
+                    </div>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+                    <div>
+                      <div>
+                        <span class="fw-bold">Start at:</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div><span class="fw-bold">End At:</span></div>
+                    </div>
 
+                    <div>
+                      <div>
+                        <span class="fw-bold">Total Price:</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div>
+                        <span class="fw-bold">Arrival Time:</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div><span class="fw-bold">Days:</span></div>
+                    </div>
+
+                    <div>
+                      <div>
+                        <span class="fw-bold">Number Of Rooms:</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        <span class="fw-bold">Special Request:</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-column justify-content-between h-100">
+                    <div>
+                      <div>
+                        <span>{{
+                          selectedRoom.firstName
+                            ? selectedRoom.firstName
+                            : "---"
+                        }}</span>
+                      </div>
+                    </div>
+                    <div>
+                      <span>{{
+                        selectedRoom.lastName ? selectedRoom.lastName : "---"
+                      }}</span>
+                    </div>
+
+                    <div>
+                      <span>{{
+                        selectedRoom.fullGuestName
+                          ? selectedRoom.fullGuestName
+                          : "---"
+                      }}</span>
+                    </div>
+
+                    <div>
+                      <span>{{
+                        selectedRoom.guestEmail
+                          ? selectedRoom.guestEmail
+                          : "---"
+                      }}</span>
+                    </div>
+                    <div>
+                      <span>{{ selectedRoom.forWork ? "Yes" : "No" }}</span>
+                    </div>
+                    <div>
+                      <span>{{
+                        selectedRoom.cancelFree == true
+                          ? "Free canceltion"
+                          : "Not available"
+                      }}</span>
+                    </div>
+                    <div>
+                      <span>{{
+                        selectedRoom.startAt | date: "mediumDate"
+                      }}</span>
+                    </div>
+                    <div>
+                      <span>{{ selectedRoom.endAt | date: "mediumDate" }}</span>
+                    </div>
+
+                    <div>
+                      <span
+                        >{{
+                          selectedRoom.totalPrice
+                            ? selectedRoom.totalPrice
+                            : "---"
+                        }}
+                        $</span
+                      >
+                    </div>
+
+                    <div>
+                      <span>{{
+                        selectedRoom.arrivalTime
+                          ? selectedRoom.arrivalTime
+                          : "---"
+                      }}</span>
+                    </div>
+
+                    <div>
+                      <span>{{
+                        selectedRoom.days ? selectedRoom.days + " days" : "---"
+                      }}</span>
+                    </div>
+                    <div>
+                      <span>{{
+                        selectedRoom.numOfRooms
+                          ? selectedRoom.numOfRooms + " rooms"
+                          : "---"
+                      }}</span>
+                    </div>
+
+                    <div>
+                      <span>{{
+                        selectedRoom.specialRequest
+                          ? selectedRoom.specialRequest
+                          : "---"
+                      }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <div *ngIf="bookings.length <= 0">
+    <div
+      class="
+        d-flex
+        my-5
+        py-5
+        justify-content-lg-center
+        align-items-center
+        flex-column
+      "
+    >
+      <svg
+        data-test-id="default-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="70px"
+        fill="#888888"
+        height="70px"
+        class="bui-empty-state__icon"
+      >
+        <path
+          d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z"
+        ></path>
+      </svg>
+      <h4 class="my-4" style="color: #888888">
+        You haven't received any bookings
+      </h4>
     </div>
-    <div *ngIf="bookings.length<=0">
-        <div class="d-flex  my-5 py-5 justify-content-lg-center align-items-center flex-column">
-            <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="70px"
-                fill="#888888" height="70px" class="bui-empty-state__icon">
-                <path
-                    d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z">
-                </path>
-            </svg>
-            <h4 class="my-4" style="color:#888888">You haven't received any bookings</h4>
-        </div>
-    </div>
-
+  </div>
 </div>

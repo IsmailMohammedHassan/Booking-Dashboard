@@ -40,6 +40,12 @@ export class TransactionsComponent implements OnInit {
   displayedColumns2: string[] = ['transactionDate', 'Amount'];
   displayedColumns3: string[] = ['transactionDate', 'withdrawAt', 'Amount'];
 
+ float2int (num : any) {
+   console.log(num , "aaaaaaaaaaaaaaaa")
+    return Math.trunc(+num);
+}
+
+  
   paypalAcc: any;
   ngOnInit(): void {
     this.isLoading = true;
@@ -55,7 +61,7 @@ export class TransactionsComponent implements OnInit {
           this.bookingAccount = result.data.bookingAccount;
           this.allTransactions = result.data.allTransaction;
           this.withdrals = result.data.Withdrawals;
-          this.dues = result.data.dues;
+          this.dues = Math.trunc(result.data.dues);
           this.paypalAcc = result.data.paymentOption;
           console.log(this.allTransactions);
           for (let trans of this.allTransactions) {
@@ -67,11 +73,13 @@ export class TransactionsComponent implements OnInit {
           for (let booking of result.data.bookingAccount) {
             let date = new Date(booking.withdrawAt);
             if (date <= new Date()) {
-              this.withdrawAmount += booking.price;
+              this.withdrawAmount += Math.trunc(booking.price);
               this.withdrawDetails.push(booking);
               this.dataSource = this.withdrawDetails;
             }
           }
+          this.allTransactionsAmount = Math.trunc(this.allTransactionsAmount)
+          this.allWithdrawlsAmount = Math.trunc(this.allWithdrawlsAmount)
           this.isLoading = false;
           console.log(this.withdrawDetails);
         });
@@ -86,6 +94,8 @@ export class TransactionsComponent implements OnInit {
             this.allTransactions = result.data.allTransactions;
             this.withdrals = result.data.Withdrawals;
             this.paypalAcc = result.data.paymentOption;
+                      this.dues = Math.trunc(result.data.dues);
+
             for (let trans of this.allTransactions) {
               this.allTransactionsAmount += trans.Amount;
             }
@@ -95,10 +105,14 @@ export class TransactionsComponent implements OnInit {
             for (let booking of result.data.bookingAccount) {
               let date = new Date(booking.withdrawAt);
               if (date <= new Date()) {
-                this.withdrawAmount += booking.price;
+                this.withdrawAmount +=  booking.price;
                 this.withdrawDetails.push(booking);
               }
             }
+               this.allTransactionsAmount = Math.trunc(
+                 this.allTransactionsAmount
+               );
+               this.allWithdrawlsAmount = Math.trunc(this.allWithdrawlsAmount);
             this.isLoading = false;
           });
         break;
@@ -111,6 +125,7 @@ export class TransactionsComponent implements OnInit {
             this.bookingAccount = result.data.bookingAccount;
             this.allTransactions = result.data.allTransactions;
             this.withdrals = result.data.Withdrawals;
+             this.dues = Math.trunc(result.data.dues);
             this.paypalAcc = result.data.paymentOption;
             for (let trans of this.allTransactions) {
               this.allTransactionsAmount += trans.Amount;
@@ -125,6 +140,11 @@ export class TransactionsComponent implements OnInit {
                 this.withdrawDetails.push(booking);
               }
             }
+
+               this.allTransactionsAmount = Math.trunc(
+                 this.allTransactionsAmount
+               );
+               this.allWithdrawlsAmount = Math.trunc(this.allWithdrawlsAmount);
             this.isLoading = false;
           });
         break;
