@@ -2,23 +2,27 @@
     <mat-spinner></mat-spinner>
 </div>
 <div class="container py-5" *ngIf="!isLoading">
-    <h1>{{propName}}</h1>
-    <div class="col-8 py-4 bg-white">
+    <div class="col-8 mx-auto">
+        <h1>{{propName}}</h1>
+    </div>
+
+    <div class="col-8 mx-auto py-4 bg-white">
+
         <h1>Latest bookings</h1>
 
 
         <table class="table mb-5" *ngIf="latestBookings.length>0">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Guest</th>
-                    <th scope="col">Check in</th>
-                    <th scope="col">Check out</th>
+                    <th>#</th>
+                    <th>Guest</th>
+                    <th>Check in</th>
+                    <th>Check out</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let booking of latestBookings; let i = index">
-                <tr>
-                    <th scope="row">{{i+1}}</th>
+            <tbody>
+                <tr *ngFor="let booking of latestBookings; let i = index">
+                    <th>{{i+1}}</th>
                     <td>{{booking.guestId.username }}</td>
                     <td>{{booking.startAt | date:'mediumDate'}}</td>
                     <td>{{booking.endAt | date:'mediumDate'}}</td>

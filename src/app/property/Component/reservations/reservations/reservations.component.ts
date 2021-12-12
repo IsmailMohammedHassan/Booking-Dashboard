@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.scss'],
 })
-export class ReservationsComponent implements OnInit {
+export class BookingsComponent implements OnInit {
   displayedColumns: string[] = [
     'name',
     'startAt',

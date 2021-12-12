@@ -1,163 +1,167 @@
 <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center spinner">
   <mat-spinner></mat-spinner>
 </div>
+<div class="container">
 
-<div class="w-50 mx-5 p-3 bg-white rounded-2 my-5" *ngIf="!isLoading">
-  <h1>Guests reviews</h1>
-  <div *ngIf="apartments.length<=0&&allHotels.length<=0&&allCamp.length<=0 &&!isLoading">
-    <div class="d-flex py-5 my-5 justify-content-lg-center align-items-center flex-column">
-      <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="70px"
-        fill="#888888" height="70px" class="bui-empty-state__icon">
-        <path
-          d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z">
-        </path>
-      </svg>
-      <h4 class="my-4" style="color:#888888">No reviews yet</h4>
+
+  <div class=" mx-auto p-3 bg-white rounded-2 my-5" *ngIf="!isLoading">
+    <h1 class="my-3">Guests reviews</h1>
+    <div *ngIf="apartments.length<=0&&allHotels.length<=0&&allCamp.length<=0 &&!isLoading">
+      <div class="d-flex py-5 my-5 justify-content-lg-center align-items-center flex-column">
+        <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="70px"
+          fill="#888888" height="70px" class="bui-empty-state__icon">
+          <path
+            d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z">
+          </path>
+        </svg>
+        <h4 class="my-4" style="color:#888888">No reviews yet</h4>
+      </div>
     </div>
+    <ng-container *ngIf="apartments.length!=0">
+      <mat-card class="bg-light mb-5">
+        <h2>Apartments</h2>
+        <ng-container *ngFor="let apartment of apartments;let i = index">
+
+
+          <div class="mb-3">
+
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="align-items-center col-6">
+                    <img class="propImage m-3" [src]="apartment.images[0]" alt="" srcset="">
+                    {{apartment.apartmentName}}
+                  </mat-panel-title>
+                  <mat-panel-description class="align-items-center col-3 ">
+                    <p>{{apartment.totalReviews}} review</p>
+                  </mat-panel-description>
+                  <mat-panel-description class="align-items-center col-3">
+                    <span class=" bg-primary_color badge-rating ">{{apartment.avgReviews}}.0</span>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ng-container *ngFor="let review of apartmentReviews[i]">
+                  <div class="bg-light rounded-2 p-2 mt-2">
+                    <div class="d-flex container align-items-center mt-3 mb-2 ">
+                      <img class="propImage" [src]="review.userId.personalImage" alt="" srcset="">
+                      <div class="align-items-center mx-2 mt-2">
+                        <p class="m-0">{{review.userId.username}}</p>
+                        <p>{{review.createdAt | date:'medium'}}</p>
+                      </div>
+
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                      <p class="col-9 me-auto">{{review.body}}</p>
+                      <span class="col-1 bg-primary_color badge-rating ">{{review.starRating}}.0</span>
+                    </div>
+
+                  </div>
+                </ng-container>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </ng-container>
+
+      </mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="allHotels.length!=0">
+      <mat-card class="bg-light mb-5">
+        <h2>Hotels</h2>
+        <ng-container *ngFor="let hotel of allHotels;let i = index">
+
+          <div class="mb-3">
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="align-items-center col-6">
+                    <img class="propImage m-3" [src]="hotel.images[0]" alt="" srcset="">
+                    {{hotel.hotelName}}
+                  </mat-panel-title>
+                  <mat-panel-description class="align-items-center col-3 ">
+                    <p>{{hotel.totalReviews}} review</p>
+                  </mat-panel-description>
+                  <mat-panel-description class="align-items-center col-3">
+                    <span
+                      class=" bg-primary_color badge-rating ">{{hotel.avgReviews.toString().split('').splice(0,3).join('')}}</span>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ng-container *ngFor="let review of HotelReviews[i]">
+                  <div class="bg-light rounded-2 p-2 mt-2">
+                    <div class="d-flex container align-items-center mt-3 mb-2 ">
+                      <img class="propImage" [src]="review.userId.personalImage" alt="" srcset="">
+                      <div class="align-items-center mx-2 mt-2">
+                        <p class="m-0">{{review.userId.username}}</p>
+                        <p>{{review.createdAt | date:'medium'}}</p>
+                      </div>
+
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                      <p class="col-9 me-auto">{{review.body}}</p>
+                      <span class="col-1 bg-primary_color badge-rating ">{{review.starRating}}.0</span>
+                    </div>
+
+                  </div>
+                </ng-container>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </ng-container>
+
+      </mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="allCamp.length!=0">
+      <mat-card class="bg-light mb-5">
+        <h2>Campgrounds</h2>
+        <ng-container *ngFor="let camp of allCamp;let i = index">
+
+          <div class="mb-3">
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="align-items-center col-6">
+                    <img class="propImage m-3" [src]="camp.images[0]" alt="" srcset="">
+                    {{camp.campgroundName}}
+                  </mat-panel-title>
+                  <mat-panel-description class="align-items-center col-3 ">
+                    <p>{{camp.totalReviews}} review</p>
+                  </mat-panel-description>
+                  <mat-panel-description class="align-items-center col-3">
+                    <span class=" bg-primary_color badge-rating ">{{camp.avgReviews}}.0</span>
+                  </mat-panel-description>
+
+
+
+                </mat-expansion-panel-header>
+                <ng-container *ngFor="let review of campReviews[i]">
+                  <div class="bg-light rounded-2 p-2 mt-2">
+                    <div class="d-flex container align-items-center mt-3 mb-2 ">
+                      <img class="propImage" [src]="review.userId.personalImage" alt="" srcset="">
+                      <div class="align-items-center mx-2 mt-2">
+                        <p class="m-0">{{review.userId.username}}</p>
+                        <p>{{review.createdAt | date:'medium'}}</p>
+                      </div>
+
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                      <p class="col-9 me-auto">{{review.body}}</p>
+                      <span class="col-1 bg-primary_color badge-rating ">{{review.starRating}}.0</span>
+                    </div>
+                  </div>
+
+
+                </ng-container>
+
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </ng-container>
+
+      </mat-card>
+
+    </ng-container>
   </div>
-  <ng-container *ngIf="apartments.length!=0">
-    <mat-card class="bg-light mb-5">
-      <h2>Apartments</h2>
-      <ng-container *ngFor="let apartment of apartments;let i = index">
-
-
-        <div class="mb-3">
-
-          <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
-              <mat-expansion-panel-header>
-                <mat-panel-title class="align-items-center col-6">
-                  <img class="propImage m-3" [src]="apartment.images[0]" alt="" srcset="">
-                  {{apartment.apartmentName}}
-                </mat-panel-title>
-                <mat-panel-description class="align-items-center col-3 ">
-                  <p>{{apartment.totalReviews}} review</p>
-                </mat-panel-description>
-                <mat-panel-description class="align-items-center col-3">
-                  <span class=" bg-primary_color badge-rating ">{{apartment.avgReviews}}.0</span>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <ng-container *ngFor="let review of apartmentReviews[i]">
-                <div class="bg-light rounded-2 p-2 mt-2">
-                  <div class="d-flex container align-items-center mt-3 mb-2 ">
-                    <img class="propImage" [src]="review.userId.personalImage" alt="" srcset="">
-                    <div class="align-items-center mx-2 mt-2">
-                      <p class="m-0">{{review.userId.username}}</p>
-                      <p>{{review.createdAt | date:'medium'}}</p>
-                    </div>
-
-                  </div>
-                  <hr>
-                  <div class="d-flex">
-                    <p class="col-9 me-auto">{{review.body}}</p>
-                    <span class="col-1 bg-primary_color badge-rating ">{{review.starRating}}.0</span>
-                  </div>
-
-                </div>
-              </ng-container>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </ng-container>
-
-    </mat-card>
-  </ng-container>
-
-  <ng-container *ngIf="allHotels.length!=0">
-    <mat-card class="bg-light mb-5">
-      <h2>Hotels</h2>
-      <ng-container *ngFor="let hotel of allHotels;let i = index">
-
-        <div class="mb-3">
-          <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
-              <mat-expansion-panel-header>
-                <mat-panel-title class="align-items-center col-6">
-                  <img class="propImage m-3" [src]="hotel.images[0]" alt="" srcset="">
-                  {{hotel.hotelName}}
-                </mat-panel-title>
-                <mat-panel-description class="align-items-center col-3 ">
-                  <p>{{hotel.totalReviews}} review</p>
-                </mat-panel-description>
-                <mat-panel-description class="align-items-center col-3">
-                  <span class=" bg-primary_color badge-rating ">{{hotel.avgReviews}}.0</span>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <ng-container *ngFor="let review of HotelReviews[i]">
-                <div class="bg-light rounded-2 p-2 mt-2">
-                  <div class="d-flex container align-items-center mt-3 mb-2 ">
-                    <img class="propImage" [src]="review.userId.personalImage" alt="" srcset="">
-                    <div class="align-items-center mx-2 mt-2">
-                      <p class="m-0">{{review.userId.username}}</p>
-                      <p>{{review.createdAt | date:'medium'}}</p>
-                    </div>
-
-                  </div>
-                  <hr>
-                  <div class="d-flex">
-                    <p class="col-9 me-auto">{{review.body}}</p>
-                    <span class="col-1 bg-primary_color badge-rating ">{{review.starRating}}.0</span>
-                  </div>
-
-                </div>
-              </ng-container>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </ng-container>
-
-    </mat-card>
-  </ng-container>
-
-  <ng-container *ngIf="allCamp.length!=0">
-    <mat-card class="bg-light mb-5">
-      <h2>Campgrounds</h2>
-      <ng-container *ngFor="let camp of allCamp;let i = index">
-
-        <div class="mb-3">
-          <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
-              <mat-expansion-panel-header>
-                <mat-panel-title class="align-items-center col-6">
-                  <img class="propImage m-3" [src]="camp.images[0]" alt="" srcset="">
-                  {{camp.campgroundName}}
-                </mat-panel-title>
-                <mat-panel-description class="align-items-center col-3 ">
-                  <p>{{camp.totalReviews}} review</p>
-                </mat-panel-description>
-                <mat-panel-description class="align-items-center col-3">
-                  <span class=" bg-primary_color badge-rating ">{{camp.avgReviews}}.0</span>
-                </mat-panel-description>
-
-
-
-              </mat-expansion-panel-header>
-              <ng-container *ngFor="let review of campReviews[i]">
-                <div class="bg-light rounded-2 p-2 mt-2">
-                  <div class="d-flex container align-items-center mt-3 mb-2 ">
-                    <img class="propImage" [src]="review.userId.personalImage" alt="" srcset="">
-                    <div class="align-items-center mx-2 mt-2">
-                      <p class="m-0">{{review.userId.username}}</p>
-                      <p>{{review.createdAt | date:'medium'}}</p>
-                    </div>
-
-                  </div>
-                  <hr>
-                  <div class="d-flex">
-                    <p class="col-9 me-auto">{{review.body}}</p>
-                    <span class="col-1 bg-primary_color badge-rating ">{{review.starRating}}.0</span>
-                  </div>
-                </div>
-
-
-              </ng-container>
-
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </ng-container>
-
-    </mat-card>
-
-  </ng-container>
 </div>

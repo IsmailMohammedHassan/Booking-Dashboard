@@ -22,6 +22,8 @@ import { CampgroundSettingsComponent } from './property/Component/campground-set
 import { ApartmentSettingComponent } from './property/Component/apartment-setting/apartment-setting/apartment-setting.component';
 import { TransactionsComponent } from './property/Component/transactions/transactions.component';
 import { InboxComponent } from './property/Component/inbox/inbox.component';
+import { BookingsComponent } from './property/Component/reservations/reservations/reservations.component';
+import { PropertyReviewsComponent } from './property/Component/reviews/reviews.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/grouphomepage', pathMatch: 'full' },
@@ -110,12 +112,12 @@ const routes: Routes = [
       },
       {
         path: 'bookings/:prop/:id',
-        component: ReservationsComponent,
+        component: BookingsComponent,
         canActivate: [UserAuthGuard],
       },
       {
         path: 'reviews/:prop/:id',
-        component: ReviewsComponent,
+        component: PropertyReviewsComponent,
         canActivate: [UserAuthGuard],
       },
       {
@@ -141,7 +143,6 @@ const routes: Routes = [
     ],
   },
 ];
- 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

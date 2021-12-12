@@ -8,8 +8,8 @@ import { FooterComponent } from './Component/footer/footer.component';
 import { HomeComponent } from './Component/home/home.component';
 import { InboxComponent } from './Component/inbox/inbox.component';
 import { PropertySettingsComponent } from './Component/property-settings/property-settings/property-settings.component';
-import { ReservationsComponent } from './Component/reservations/reservations/reservations.component';
-import { ReviewsComponent } from './Component/reviews/reviews.component';
+import { BookingsComponent } from './Component/reservations/reservations/reservations.component';
+import { PropertyReviewsComponent } from './Component/reviews/reviews.component';
 import { TransactionsComponent } from './Component/transactions/transactions.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatrialModule } from '../matrial/matrial.module';
@@ -21,8 +21,8 @@ import { PropertyComponent } from './property/property.component';
 //     path: '',
 //     component: ApartmentSettingComponent, pathMatch: 'full'
 //   },
-// ]; 
- 
+// ];
+
 @NgModule({
   declarations: [
     ApartmentSettingComponent,
@@ -33,19 +33,19 @@ import { PropertyComponent } from './property/property.component';
     HomeComponent,
     InboxComponent,
     PropertySettingsComponent,
-    ReservationsComponent,
-    ReviewsComponent,
+    BookingsComponent,
+    PropertyReviewsComponent,
     TransactionsComponent,
     PropertyComponent,
-   ],
+  ],
 
   imports: [
     CommonModule,
-//  RouterModule.forChild(routes),
+    //  RouterModule.forChild(routes),
     MatrialModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
   ],
- })
+})
 export class PropertyModule {}

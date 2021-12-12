@@ -11,7 +11,7 @@ import { SharedService } from '../../../../../Services/shared.service';
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.scss'],
 })
-export class ReviewsComponent implements OnInit {
+export class PropertyReviewsComponent implements OnInit {
   propId: any;
   prop: any;
   constructor(

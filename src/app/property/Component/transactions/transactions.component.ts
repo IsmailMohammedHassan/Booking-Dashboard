@@ -7,7 +7,6 @@ import { HotelService } from '../../../../../Services/hotel.service';
 import { SharedService } from '../../../../../Services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -139,7 +138,7 @@ export class TransactionsComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
         this._snackBar.open(
-          'Your request has been sent successfully, you will be answered within 24 hours',
+          'Your request has been sent successfully, you will be answered within 72 hours',
           'ok'
         );
       });

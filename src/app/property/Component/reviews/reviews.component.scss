@@ -23,8 +23,8 @@
   height: 0px;
   position: absolute;
   border-left: 10px solid transparent;
-  border-right: 10px solid #f8f9fa;
-  border-top: 10px solid #f8f9fa;
+  border-right: 10px solid aliceblue;
+  border-top: 10px solid aliceblue;
   border-bottom: 10px solid transparent;
   left: -19px;
   top: 10px;
@@ -32,6 +32,8 @@
 .box {
   position: relative;
   border-radius: 6px;
+  background: aliceblue;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .spinner {
   height: 500px;

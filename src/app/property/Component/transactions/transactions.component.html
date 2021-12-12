@@ -63,7 +63,7 @@
                             <div class=" my-3 p-3  " *ngIf="paypalInput ">
                                 <mat-form-field class="example-full-width w-100" appearance="outline">
                                     <mat-label>Paypal account</mat-label>
-                                    <input type="number" matInput [(ngModel)]="paypalAcc">
+                                    <input type="text" matInput [(ngModel)]="paypalAcc">
                                 </mat-form-field>
                                 <button mat-stroked-button (click)="openSnackBar()" color="primary">Send
                                     request</button>
