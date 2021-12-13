@@ -94,4 +94,15 @@ export class BookingsComponent implements OnInit {
 
     console.log(this.dataSource);
   }
+
+
+
+
+    selectedRoom :any = {}
+    getRoomData(elment:any){
+     this.selectedRoom = elment;
+    }
+
+
+
 }

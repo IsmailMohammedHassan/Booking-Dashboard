@@ -48,7 +48,7 @@ const routes: Routes = [
     canActivate: [UserAuthGuard],
   },
   {
-    path: 'add-property-home',
+    path: 'add-home',
     component: AddPropertyHomePageComponent,
     canActivate: [UserAuthGuard],
   },

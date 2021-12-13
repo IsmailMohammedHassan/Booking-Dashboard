@@ -16,12 +16,6 @@ import { MatrialModule } from '../matrial/matrial.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PropertyComponent } from './property/property.component';
 
-// const routes: Routes = [
-//   {
-//     path: '',
-//     component: ApartmentSettingComponent, pathMatch: 'full'
-//   },
-// ];
 
 @NgModule({
   declarations: [

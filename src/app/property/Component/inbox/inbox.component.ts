@@ -82,6 +82,7 @@ export class InboxComponent implements OnInit {
       default:
         return;
     }
+    console.log(this.allReplys)
   }
   leaveReply(id: any, replay: any, index: number) {
     if (replay.value != '') {

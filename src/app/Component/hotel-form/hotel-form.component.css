@@ -29,4 +29,13 @@
 ::ng-deep .mat-horizontal-stepper-header {
   pointer-events: none !important;
 }
+.c-icon {
+    --star-active: #fece3c;
+    --star-inactive: #6c6962;
+    fill: var(--star-inactive);
+}
+
+.c-icon.active {
+    fill: var(--star-active);
+}
 /*# sourceMappingURL=hotel-form.component.css.map */
