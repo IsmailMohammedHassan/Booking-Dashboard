@@ -23,8 +23,12 @@ export class LoginComponent implements OnInit {
         this.wrong = 'Wrong email or password';
       }
       if (result.success == true) {
-        localStorage.setItem('authentication', result.token);
-        window.location.href = 'http://localhost:4200/';
+        if (result.data.type == 'partner') {
+          localStorage.setItem('authentication', result.token);
+          window.location.href = 'http://localhost:4200/';
+        } else {
+          window.location.href = 'http://localhost:3000/auth/' + result.token;
+        }
       }
     });
   }
