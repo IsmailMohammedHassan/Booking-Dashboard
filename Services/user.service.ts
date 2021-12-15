@@ -16,19 +16,11 @@ export class UserService {
   };
 
   creatUser(user: any): Observable<any> {
-    return this.http.post<any>(
-      environment.Api + 'user/register/user',
-      user,
-      this.httpOptions
-    );
+    return this.http.post<any>(environment.Api + 'user/register/user', user);
   }
 
   creatPartner(user: any): Observable<any> {
-    return this.http.post<any>(
-      environment.Api + 'user/register/partner',
-      user,
-      this.httpOptions
-    );
+    return this.http.post<any>(environment.Api + 'user/register/partner', user);
   }
 
   LoginUser(user: any): Observable<any> {

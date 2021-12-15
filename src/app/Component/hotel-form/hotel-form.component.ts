@@ -56,12 +56,7 @@ export class HotelFormComponent implements OnInit {
     checkOut: ['', Validators.required],
     children: ['', Validators.required],
     pets: ['', Validators.required],
-    paymentOption: [
-      '',
-      Validators.required,
-      Validators.minLength(16),
-      Validators.maxLength(16),
-    ],
+    paymentOption: ['', Validators.required],
     facilities: this._formBuilder.group({
       parking: ['', Validators.required],
       breakfast: ['', Validators.required],

@@ -84,9 +84,10 @@ export class RegestertionComponent implements OnInit {
   imageInfos?: Observable<any>;
   isLoading = false;
   uploadImg(idx: number, file: File): void {
+    this.isLoading = true;
     this.progressInfos[idx] = { value: 0, fileName: file.name };
     const formData = new FormData();
-
+    console.log(this.UserData);
     formData.append('multiple_images', file);
 
     if (file) {
@@ -94,18 +95,17 @@ export class RegestertionComponent implements OnInit {
         (event: any) => {
           console.log(event);
           this.UserData.personalImage = event.data[0];
-          console.log(this.UserData);
+          console.log(this.UserData.type);
           if (this.UserData.type == 'partner') {
-            this.isLoading = true;
             this.register.creatPartner(this.UserData).subscribe((partner) => {
               if (partner.success) {
-                console.log(partner);
+                console.log(partner, 'partner');
                 this.success =
                   'User was registered successfully! please check your email to active your account';
                 this.isLoading = false;
               }
               if (!partner.success) {
-                console.log(partner);
+                console.log(partner, 'partner');
                 this.wrong = 'Invalid credintials';
                 this.isLoading = false;
               }
@@ -115,14 +115,14 @@ export class RegestertionComponent implements OnInit {
           if (this.UserData.type == 'user') {
             this.register.creatUser(this.UserData).subscribe((user) => {
               if (user.success) {
-                console.log(user);
+                console.log(user, 'user');
                 this.success =
                   'User was registered successfully! please check your email to active your account';
                 this.wrong = false;
                 this.isLoading = false;
               }
               if (!user.success) {
-                console.log(user);
+                console.log(user, 'user');
                 this.wrong = 'Invalid credintials';
                 this.isLoading = false;
               }
