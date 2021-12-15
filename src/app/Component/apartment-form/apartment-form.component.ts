@@ -54,11 +54,15 @@ export class ApartmentFormComponent implements OnInit {
 
   Apartment = this._formBuilder.group({
     apartmentName: ['', Validators.required],
+    apartmentNameAR: ['', Validators.required],
     phone: ['', Validators.required],
     country: ['', Validators.required],
+    countryAR: ['', Validators.required],
     city: ['', Validators.required],
+    cityAR: ['', Validators.required],
     zipCode: ['', Validators.required],
     streetAddress: ['', Validators.required],
+    streetAddressAR: ['', Validators.required],
     homeNumber: ['', Validators.required],
     apartmentNumber: ['', Validators.required],
     paymentOption: ['', Validators.required],
@@ -71,7 +75,7 @@ export class ApartmentFormComponent implements OnInit {
     events: ['', Validators.required],
     smoking: ['', Validators.required],
     description: ['', Validators.required],
-
+    descriptionAR: ['', Validators.required],
     facilities: this._formBuilder.group({
       general: ['', Validators.required],
       cookingAndCleaening: ['', Validators.required],

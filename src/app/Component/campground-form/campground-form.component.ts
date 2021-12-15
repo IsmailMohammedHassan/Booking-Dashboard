@@ -54,12 +54,17 @@ export class CampgroundFormComponent implements OnInit {
 
   Campground = this._formBuilder.group({
     campgroundName: ['', Validators.required],
+    campgroundNameAR: ['', Validators.required],
     country: ['', Validators.required],
+    countryAR: ['', Validators.required],
     city: ['', Validators.required],
+    cityAR: ['', Validators.required],
     zipCode: ['', Validators.required],
     phone: ['', Validators.required],
     streetAddress: ['', Validators.required],
+    streetAddressAR: ['', Validators.required],
     description: ['', Validators.required],
+    descriptionAR: ['', Validators.required],
     facilities: this._formBuilder.group({
       parking: ['', Validators.required],
       breakfast: ['', Validators.required],

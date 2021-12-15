@@ -31,6 +31,9 @@ import { GoogleDashboardComponent } from './Component/google-dashboard/google-da
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NotificationsComponent } from './Component/notifications/notifications.component';
 import { PropertyModule } from './property/property.module';
+import { CommonModule } from '@angular/common';
+import { ConfirmComponent } from './Component/confirm/confirm.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +52,7 @@ import { PropertyModule } from './property/property.module';
     RegestertionComponent,
     GoogleDashboardComponent,
     NotificationsComponent,
+    ConfirmComponent,
   ],
   imports: [
     GoogleMapsModule,
@@ -61,6 +65,7 @@ import { PropertyModule } from './property/property.module';
     SocialLoginModule,
     FontAwesomeModule,
     PropertyModule,
+    CommonModule,
   ],
   providers: [
     {

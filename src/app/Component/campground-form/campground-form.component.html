@@ -5,36 +5,10 @@
             <mat-step label="Basic Info">
 
                 <div class="bg-white  w-50 rounded-2 mb-2  p-5">
+                    <h2>Fill data in english</h2>
                     <mat-form-field type="text" class="w-100" appearance="fill">
                         <mat-label>Campground Name</mat-label>
                         <input matInput type="text" placeholder="Ex. Grand" formControlName="campgroundName">
-                    </mat-form-field>
-
-                    <mat-form-field class="w-100" appearance="fill">
-                        <mat-label>Phone Number</mat-label>
-                        <input type="tel" matInput placeholder="Ex. 010***" formControlName="phone">
-                    </mat-form-field>
-                </div>
-                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
-                    <div class="w-100">
-                        <google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
-                            <map-marker [position]="markerPositions!" [options]="markerOptions"></map-marker>
-                        </google-map>
-                    </div>
-
-                </div>
-                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
-                    <mat-form-field class="example-full-width w-100" appearance="fill">
-                        <mat-label>Description</mat-label>
-                        <textarea formControlName="description" matInput></textarea>
-                    </mat-form-field>
-                </div>
-
-                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
-                    <p class="fs-5">Where's your property located?</p>
-                    <mat-form-field class="w-100" appearance="fill">
-                        <mat-label>Street address</mat-label>
-                        <input matInput placeholder="Ex. 123 Easy Street" formControlName="streetAddress">
                     </mat-form-field>
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Country</mat-label>
@@ -45,9 +19,55 @@
                         <input matInput placeholder="Ex. Qena" formControlName="city">
                     </mat-form-field>
                     <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>Street address</mat-label>
+                        <input matInput placeholder="Ex. 123 Easy Street" formControlName="streetAddress">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width w-100" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName="description" matInput></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="bg-white  w-50 rounded-2 mb-2 p-5 ">
+                    <h2>املئ البيانات باللغة العربية</h2>
+                    <mat-form-field type="text" class="w-100" appearance="fill">
+                        <mat-label>إسم الشقة</mat-label>
+                        <input matInput type="text" placeholder="Ex. Grand" formControlName="campgroundNameAR">
+                    </mat-form-field>
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>الدولة</mat-label>
+                        <input matInput placeholder="Ex. Egypt" formControlName="countryAR">
+                    </mat-form-field>
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>المدينة</mat-label>
+                        <input matInput placeholder="Ex. Qena" formControlName="cityAR">
+                    </mat-form-field>
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>العنوان</mat-label>
+                        <input matInput placeholder="Ex. Qena" formControlName="streetAddressAR">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width w-100" appearance="fill">
+                        <mat-label>الوصف</mat-label>
+                        <textarea formControlName="descriptionAR" matInput></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>Phone Number</mat-label>
+                        <input type="tel" matInput placeholder="Ex. 010***" formControlName="phone">
+                    </mat-form-field>
+                    <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Zip Code</mat-label>
                         <input matInput type="number" placeholder="Ex. 65311" formControlName="zipCode">
                     </mat-form-field>
+                </div>
+
+                <div class="bg-white  w-50 rounded-2 mb-2  p-5">
+                    <div class="w-100">
+                        <google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
+                            <map-marker [position]="markerPositions!" [options]="markerOptions"></map-marker>
+                        </google-map>
+                    </div>
                 </div>
 
 

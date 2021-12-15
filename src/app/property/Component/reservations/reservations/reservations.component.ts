@@ -47,6 +47,7 @@ export class BookingsComponent implements OnInit {
     this.shared
       .cancelFree(this.prop, this.propId, bookingId)
       .subscribe((data) => {
+        console.log(data);
         this._snackBar.open('Message sucessfully sent', 'Ok');
       });
   }
@@ -95,14 +96,8 @@ export class BookingsComponent implements OnInit {
     console.log(this.dataSource);
   }
 
-
-
-
-    selectedRoom :any = {}
-    getRoomData(elment:any){
-     this.selectedRoom = elment;
-    }
-
-
-
+  selectedRoom: any = {};
+  getRoomData(elment: any) {
+    this.selectedRoom = elment;
+  }
 }

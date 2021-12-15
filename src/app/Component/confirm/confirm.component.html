@@ -1,0 +1,14 @@
+<header>
+    <div class="container pt-2  d-flex align-items-center">
+        <h1>Booking.com</h1>
+    </div>
+</header>
+
+<div class="d-flex justify-content-center m-4 flex-column align-items-center">
+    <ng-container *ngIf="!error">
+        <h1>Congrationlation your account has been activated</h1>
+        <a href="http://localhost:4200/login"><button class="btn btn-primary">Login</button></a>
+    </ng-container>
+
+    <h1>{{error}}</h1>
+</div>

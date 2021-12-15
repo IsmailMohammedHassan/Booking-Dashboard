@@ -1,4 +1,3 @@
- 
 import { CampgroundService } from '../../../../../Services/campground.service';
 
 import { Component, Input, OnInit } from '@angular/core';

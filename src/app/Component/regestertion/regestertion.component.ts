@@ -82,7 +82,7 @@ export class RegestertionComponent implements OnInit {
   uploadAvailable: boolean = true;
   previews: string[] = [];
   imageInfos?: Observable<any>;
-
+  isLoading = false;
   uploadImg(idx: number, file: File): void {
     this.progressInfos[idx] = { value: 0, fileName: file.name };
     const formData = new FormData();
@@ -96,17 +96,18 @@ export class RegestertionComponent implements OnInit {
           this.UserData.personalImage = event.data[0];
           console.log(this.UserData);
           if (this.UserData.type == 'partner') {
+            this.isLoading = true;
             this.register.creatPartner(this.UserData).subscribe((partner) => {
               if (partner.success) {
                 console.log(partner);
-                this.success = 'Registration completed please login';
-                setTimeout(() => {
-                  this.router.navigate(['/login']);
-                }, 1000);
+                this.success =
+                  'User was registered successfully! please check your email to active your account';
+                this.isLoading = false;
               }
               if (!partner.success) {
                 console.log(partner);
                 this.wrong = 'Invalid credintials';
+                this.isLoading = false;
               }
             });
           }
@@ -116,15 +117,14 @@ export class RegestertionComponent implements OnInit {
               if (user.success) {
                 console.log(user);
                 this.success =
-                  'Congratiolations, registration completed please login';
+                  'User was registered successfully! please check your email to active your account';
                 this.wrong = false;
-                setTimeout(() => {
-                  this.router.navigate(['/login']);
-                }, 1000);
+                this.isLoading = false;
               }
               if (!user.success) {
                 console.log(user);
                 this.wrong = 'Invalid credintials';
+                this.isLoading = false;
               }
             });
           }

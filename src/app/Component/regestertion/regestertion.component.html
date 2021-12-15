@@ -167,7 +167,9 @@
               <div class="alert-success p-2 mt-2 rounded-2 my-2" *ngIf="success">
                 {{success}}
               </div>
-
+              <ng-container *ngIf="isLoading">
+                <mat-spinner></mat-spinner>
+              </ng-container>
               <div class="alert-danger p-2 mt-2 rounded-2 my-2" *ngIf="wrong">
                 {{wrong}}
               </div>

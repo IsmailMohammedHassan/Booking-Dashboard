@@ -1,3 +1,5 @@
+import { ConfirmComponent } from './Component/confirm/confirm.component';
+import { ConfirmationComponent } from './Component/confirmation/confirmation.component';
 import { NotificationsComponent } from './Component/notifications/notifications.component';
 import { UserAuthGuard } from './Component/login/user-auth.guard';
 import { NgModule } from '@angular/core';
@@ -36,6 +38,14 @@ const routes: Routes = [
     path: 'reviews',
     component: ReviewsComponent,
     canActivate: [UserAuthGuard],
+  },
+  {
+    path: 'confirm/:confirmationCode',
+    component: ConfirmComponent,
+  },
+  {
+    path: 'inactive',
+    component: ConfirmationComponent,
   },
   {
     path: 'reservations',

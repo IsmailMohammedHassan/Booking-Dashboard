@@ -9,14 +9,10 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'dashbord';
   authentication = localStorage.getItem('authentication');
- 
-  constructor(private router: Router) {
-     ;
-  }
+
+  constructor(private router: Router) {}
 
   hasRoute(route: string) {
-        console.log(this.router.url);
-
     return this.router.url.includes(route);
   }
 }

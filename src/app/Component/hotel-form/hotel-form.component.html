@@ -1,87 +1,13 @@
 <div class="bg-light h-100 w-100">
- 
+
   <mat-horizontal-stepper class="bg-light" [linear]="true">
     <form [formGroup]="Hotel">
       <mat-step label="Basic Info">
         <div class="bg-white w-50 rounded-2 mb-2 p-5">
+          <h2>Fill data in english </h2>
           <mat-form-field type="text" class="w-100" appearance="fill">
             <mat-label>Hotel Name</mat-label>
-            <input
-              matInput
-              type="text"
-              placeholder="Ex. Grand"
-              formControlName="hotelName"
-            />
-          </mat-form-field>
-
-          <mat-form-field class="w-100" appearance="fill">
-            <mat-label>Star Rating</mat-label>
-
-            <mat-select formControlName="starRating">
-              <mat-option value="1"
-                ><span class="material-icons mt-" style="color: #ECBE13;"> star </span></mat-option
-              >
-              <mat-option value="2"
-                 ><span class="material-icons" style="color: #ECBE13;"> star star </span></mat-option
-              >
-              <mat-option value="3"
-                ><span class="material-icons" style="color: #ECBE13;"> star star star </span
-                >  </mat-option
-              >
-              <mat-option value="4"
-                ><span class="material-icons"style="color: #ECBE13;"> star star star star </span>
-                
-               </mat-option
-              >
-              <mat-option value="5"
-                ><span class="material-icons"style="color: #ECBE13;"> star star star star star </span>
-           
-                
-                
-                </mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field class="w-100" appearance="fill">
-            <mat-label>Phone Number</mat-label>
-            <input
-              type="tel"
-              matInput
-              placeholder="Ex. 010***"
-              formControlName="phone"
-            />
-          </mat-form-field>
-        </div>
-        <div class="bg-white w-50 rounded-2 mb-2 p-5">
-          <mat-form-field class="example-full-width w-100" appearance="fill">
-            <mat-label>Description</mat-label>
-            <textarea formControlName="description" matInput></textarea>
-          </mat-form-field>
-        </div>
-        <div class="bg-white w-50 rounded-2 mb-2 p-5">
-          <div class="w-100">
-            <google-map
-              [center]="center"
-              [zoom]="zoom"
-              (mapClick)="addMarker($event)"
-            >
-              <map-marker
-                [position]="markerPositions!"
-                [options]="markerOptions"
-              ></map-marker>
-            </google-map>
-          </div>
-        </div>
-        <div class="bg-white w-50 rounded-2 mb-2 p-5">
-          <p class="fs-5">Where's your property located?</p>
-          <mat-form-field class="w-100" appearance="fill">
-            <mat-label>Street address</mat-label>
-            <input
-              matInput
-              placeholder="Ex. 123 Easy Street"
-              formControlName="streetAddress"
-            />
+            <input matInput type="text" placeholder="Ex. Grand" formControlName="hotelName" />
           </mat-form-field>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>Country</mat-label>
@@ -92,21 +18,76 @@
             <input matInput placeholder="Ex. Qena" formControlName="city" />
           </mat-form-field>
           <mat-form-field class="w-100" appearance="fill">
-            <mat-label>Zip Code</mat-label>
-            <input
-              matInput
-              type="number"
-              placeholder="Ex. 65311"
-              ngModel
-              formControlName="zipCode"
-            />
+            <mat-label>Street address</mat-label>
+            <input matInput placeholder="Ex. 123 Easy Street" formControlName="streetAddress" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width w-100" appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput></textarea>
+          </mat-form-field>
+
+        </div>
+        <div class="bg-white  w-50 rounded-2 mb-2 p-5 ">
+          <h2>املئ البيانات باللغة العربية</h2>
+          <mat-form-field type="text" class="w-100" appearance="fill">
+            <mat-label>إسم الشقة</mat-label>
+            <input matInput type="text" placeholder="Ex. Grand" formControlName="hotelNameAR">
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>الدولة</mat-label>
+            <input matInput placeholder="Ex. Egypt" formControlName="countryAR">
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>المدينة</mat-label>
+            <input matInput placeholder="Ex. Qena" formControlName="cityAR">
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>العنوان</mat-label>
+            <input matInput placeholder="Ex. Qena" formControlName="streetAddressAR">
+          </mat-form-field>
+          <mat-form-field class="example-full-width w-100" appearance="fill">
+            <mat-label>الوصف</mat-label>
+            <textarea formControlName="descriptionAR" matInput></textarea>
           </mat-form-field>
         </div>
+        <div class="bg-white  w-50 rounded-2 mb-2 p-5 ">
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Star Rating</mat-label>
+            <mat-select formControlName="starRating">
+              <mat-option value="1"><span class="material-icons mt-" style="color: #ECBE13;"> star </span></mat-option>
+              <mat-option value="2"><span class="material-icons" style="color: #ECBE13;"> star star </span></mat-option>
+              <mat-option value="3"><span class="material-icons" style="color: #ECBE13;"> star star star </span>
+              </mat-option>
+              <mat-option value="4"><span class="material-icons" style="color: #ECBE13;"> star star star star </span>
+              </mat-option>
+              <mat-option value="5"><span class="material-icons" style="color: #ECBE13;"> star star star star star
+                </span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input type="tel" matInput placeholder="Ex. 010***" formControlName="phone" />
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Zip Code</mat-label>
+            <input matInput type="number" placeholder="Ex. 65311" ngModel formControlName="zipCode" />
+          </mat-form-field>
 
-        <button
-          mat-button
-          matStepperNext
-          [disabled]="
+        </div>
+
+        <div class="bg-white w-50 rounded-2 mb-2 p-5">
+          <div class="w-100">
+            <google-map [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
+              <map-marker [position]="markerPositions!" [options]="markerOptions"></map-marker>
+            </google-map>
+          </div>
+        </div>
+
+
+
+
+        <button mat-button matStepperNext [disabled]="
             Hotel.controls['description'].invalid ||
             Hotel.controls['zipCode'].invalid ||
             Hotel.controls['city'].invalid ||
@@ -115,29 +96,19 @@
             Hotel.controls['phone'].invalid ||
             Hotel.controls['hotelName'].invalid ||
             Hotel.controls['starRating'].invalid
-          "
-        >
+          ">
           Next
         </button>
       </mat-step>
 
       <mat-step label="Layout & Pricing">
         <div class="bg-white w-50 rounded-2 mb-2 p-5">
-          <ng-container
-            formArrayName="rooms"
-            *ngFor="let roomForm of rooms.controls; let i = index"
-          >
+          <ng-container formArrayName="rooms" *ngFor="let roomForm of rooms.controls; let i = index">
             <div class="mb-4" [formGroupName]="i">
               <h3 class="my-4">Room {{ i + 1 }}</h3>
               <mat-form-field class="w-100" appearance="fill">
                 <mat-label>Room Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  #roomName
-                  placeholder="Ex. Grand"
-                  formControlName="roomName"
-                />
+                <input matInput type="text" #roomName placeholder="Ex. Grand" formControlName="roomName" />
               </mat-form-field>
 
               <mat-form-field class="w-100" appearance="fill">
@@ -152,9 +123,7 @@
                   <mat-option value="Suite">Suite</mat-option>
                   <mat-option value="Studio">Studio</mat-option>
                   <mat-option value="Dorm Room">Dorm Room</mat-option>
-                  <mat-option value="Bed in Dorm Room"
-                    >Bed in Dorm Room</mat-option
-                  >
+                  <mat-option value="Bed in Dorm Room">Bed in Dorm Room</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="w-100" appearance="fill">
@@ -166,111 +135,60 @@
               </mat-form-field>
               <mat-form-field class="w-100" appearance="fill">
                 <mat-label>Custom Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Ex. Grand"
-                  formControlName="customName"
-                />
+                <input matInput type="text" placeholder="Ex. Grand" formControlName="customName" />
               </mat-form-field>
               <mat-form-field class="w-100" appearance="fill">
                 <mat-label>Number of rooms of this type</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  placeholder="Ex. 3"
-                  formControlName="numOfRoomOfThisType"
-                />
+                <input matInput type="number" placeholder="Ex. 3" formControlName="numOfRoomOfThisType" />
               </mat-form-field>
               <mat-form-field class="w-100" appearance="fill">
                 <mat-label>Room size</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  placeholder="Ex. 20 meter"
-                  formControlName="roomSize"
-                />
+                <input matInput type="number" placeholder="Ex. 20 meter" formControlName="roomSize" />
               </mat-form-field>
 
-              <mat-form-field
-                appearance="fill"
-                floatLabel="always"
-                class="w-100"
-              >
+              <mat-form-field appearance="fill" floatLabel="always" class="w-100">
                 <mat-label>Price</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  formControlName="price"
-                  class="example-right-align w-100"
-                  placeholder="Per day"
-                />
+                <input matInput type="number" formControlName="price" class="example-right-align w-100"
+                  placeholder="Per day" />
                 <span matPrefix>$&nbsp;</span>
                 <span matSuffix>.00</span>
               </mat-form-field>
               <hr />
               <h2>Bed Options</h2>
               <mat-form-field class="w-100" appearance="fill">
-                <mat-label
-                  >What kind of beds are available in this room?</mat-label
-                >
+                <mat-label>What kind of beds are available in this room?</mat-label>
                 <mat-select formControlName="bedType">
-                  <mat-option value="Twin bed(s) / 90-130 cm wide"
-                    >Twin bed(s) / 90-130 cm wide
+                  <mat-option value="Twin bed(s) / 90-130 cm wide">Twin bed(s) / 90-130 cm wide
                   </mat-option>
-                  <mat-option value="Full bed(s) / 131-150 cm wide"
-                    >Full bed(s) / 131-150 cm wide
+                  <mat-option value="Full bed(s) / 131-150 cm wide">Full bed(s) / 131-150 cm wide
                   </mat-option>
-                  <mat-option value="Queen bed(s) / 151-180 cm wide"
-                    >Queen bed(s) / 151-180 cm wide
+                  <mat-option value="Queen bed(s) / 151-180 cm wide">Queen bed(s) / 151-180 cm wide
                   </mat-option>
-                  <mat-option value="King bed(s) / 181-210 cm wide"
-                    >King bed(s) / 181-210 cm wide
+                  <mat-option value="King bed(s) / 181-210 cm wide">King bed(s) / 181-210 cm wide
                   </mat-option>
-                  <mat-option value="Bunk bed(s) / Variable size"
-                    >Bunk bed(s) / Variable size
+                  <mat-option value="Bunk bed(s) / Variable size">Bunk bed(s) / Variable size
                   </mat-option>
-                  <mat-option value="Sofa bed(s) / Variable size"
-                    >Sofa bed(s) / Variable size
+                  <mat-option value="Sofa bed(s) / Variable size">Sofa bed(s) / Variable size
                   </mat-option>
-                  <mat-option value="Futon bed(s) / Variable size"
-                    >Futon bed(s) / Variable size
+                  <mat-option value="Futon bed(s) / Variable size">Futon bed(s) / Variable size
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="w-100" appearance="fill">
                 <mat-label>Number of beds</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  placeholder="Ex. 65311"
-                  formControlName="bedsNumber"
-                />
+                <input matInput type="number" placeholder="Ex. 65311" formControlName="bedsNumber" />
               </mat-form-field>
               <mat-form-field class="w-100" appearance="fill">
                 <mat-label>How much guests can stay in this room</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  placeholder="Ex. 65311"
-                  formControlName="guestsNumber"
-                />
+                <input matInput type="number" placeholder="Ex. 65311" formControlName="guestsNumber" />
               </mat-form-field>
             </div>
           </ng-container>
           <div class="example-button-container text-center">
-            <img
-              style="width: 50%; height: 50%"
-              src="https://q.bstatic.com/static/img/join/segmentation/empty-state-createroom@2x.png"
-              alt=""
-            />
+            <img style="width: 50%; height: 50%"
+              src="https://q.bstatic.com/static/img/join/segmentation/empty-state-createroom@2x.png" alt="" />
             <div>
-              <button
-                (click)="addRoom()"
-                mat-stroked-button
-                class="w-75 my-3"
-                color="primary"
-              >
+              <button (click)="addRoom()" mat-stroked-button class="w-75 my-3" color="primary">
                 Add New Room
               </button>
             </div>
@@ -331,20 +249,14 @@
               <mat-option value="Water park">Water park</mat-option>
               <mat-option value="Swimming pool">Swimming pool</mat-option>
               <mat-option value="Spa">Spa</mat-option>
-              <mat-option value="24-hour front desk"
-                >24-hour front desk</mat-option
-              >
+              <mat-option value="24-hour front desk">24-hour front desk</mat-option>
               <mat-option value="Hot tub/Jacuzzi">Hot tub/Jacuzzi</mat-option>
               <mat-option value="Air conditioning">Air conditioning</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <button mat-button matStepperPrevious>Back</button>
-        <button
-          mat-button
-          matStepperNext
-          [disabled]="Hotel.controls['facilities'].invalid"
-        >
+        <button mat-button matStepperNext [disabled]="Hotel.controls['facilities'].invalid">
           Next
         </button>
       </mat-step>
@@ -355,15 +267,11 @@
             <mat-label>Room amenities</mat-label>
             <mat-select multiple formControlName="room">
               <mat-option value="Clothes rack">Clothes rack</mat-option>
-              <mat-option value="Drying rack for clothing"
-                >Drying rack for clothing</mat-option
-              >
+              <mat-option value="Drying rack for clothing">Drying rack for clothing</mat-option>
               <mat-option value="Fold-up bed">Fold-up bed</mat-option>
               <mat-option value="Air conditioning">Air conditioning</mat-option>
               <mat-option value="Dryer">Dryer</mat-option>
-              <mat-option value="Wardrobe or closet"
-                >Wardrobe or closet</mat-option
-              >
+              <mat-option value="Wardrobe or closet">Wardrobe or closet</mat-option>
               <mat-option value="Carpeted">Carpeted</mat-option>
               <mat-option value="Walk-in closet">Walk-in closet</mat-option>
               <mat-option value="Fan">Fan</mat-option>
@@ -371,15 +279,9 @@
               <mat-option value="Heating">Heating</mat-option>
               <mat-option value="Mosquito net">Mosquito net</mat-option>
               <mat-option value="Sitting area">Sitting area</mat-option>
-              <mat-option value="Electric blankets"
-                >Electric blankets</mat-option
-              >
-              <mat-option value="Hardwood or parquet floors"
-                >Hardwood or parquet floors</mat-option
-              >
-              <mat-option value="Tile/Marble floor"
-                >Tile/Marble floor</mat-option
-              >
+              <mat-option value="Electric blankets">Electric blankets</mat-option>
+              <mat-option value="Hardwood or parquet floors">Hardwood or parquet floors</mat-option>
+              <mat-option value="Tile/Marble floor">Tile/Marble floor</mat-option>
               <mat-option value="Soundproof">Soundproof</mat-option>
             </mat-select>
           </mat-form-field>
@@ -390,9 +292,7 @@
               <mat-option value="Toilet paper">Toilet paper</mat-option>
               <mat-option value="Bathtub">Bathtub</mat-option>
               <mat-option value="Bidet">Bidet</mat-option>
-              <mat-option value="Bathtub or shower"
-                >Bathtub or shower</mat-option
-              >
+              <mat-option value="Bathtub or shower">Bathtub or shower</mat-option>
               <mat-option value="Bathrobe">Bathrobe</mat-option>
               <mat-option value="Private Bathroom">Private Bathroom</mat-option>
               <mat-option value="Free toiletries">Free toiletries</mat-option>
@@ -431,12 +331,8 @@
               <mat-option value="Toaster">Toaster</mat-option>
               <mat-option value="Dishwasher">Dishwasher</mat-option>
               <mat-option value="Electric kettle">Electric kettle</mat-option>
-              <mat-option value="Outdoor dining area"
-                >Outdoor dining area</mat-option
-              >
-              <mat-option value="Outdoor furniture"
-                >Outdoor furniture</mat-option
-              >
+              <mat-option value="Outdoor dining area">Outdoor dining area</mat-option>
+              <mat-option value="Outdoor furniture">Outdoor furniture</mat-option>
               <mat-option value="Minibar">Minibar</mat-option>
               <mat-option value="Kitchen">Kitchen</mat-option>
               <mat-option value="Kitchenette">Kitchenette</mat-option>
@@ -449,14 +345,10 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Services & Extras</mat-label>
             <mat-select multiple formControlName="services">
-              <mat-option value="Executive lounge access"
-                >Executive lounge access</mat-option
-              >
+              <mat-option value="Executive lounge access">Executive lounge access</mat-option>
               <mat-option value="Alarm clock">Alarm clock</mat-option>
               <mat-option value="Wake-up service">Wake-up service</mat-option>
-              <mat-option value="Wake-up service/Alarm clock"
-                >Wake-up service/Alarm clock</mat-option
-              >
+              <mat-option value="Wake-up service/Alarm clock">Wake-up service/Alarm clock</mat-option>
               <mat-option value="Linens">Linens</mat-option>
               <mat-option value="Towels">Towels</mat-option>
             </mat-select>
@@ -476,9 +368,7 @@
               <mat-option value="Mountain view">Mountain view</mat-option>
               <mat-option value="Pool view">Pool view</mat-option>
               <mat-option value="River view">River view</mat-option>
-              <mat-option value="Quiet street view"
-                >Quiet street view</mat-option
-              >
+              <mat-option value="Quiet street view">Quiet street view</mat-option>
               <mat-option value="Sea view">Sea view</mat-option>
             </mat-select>
           </mat-form-field>
@@ -486,48 +376,31 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Accessibility</mat-label>
             <mat-select multiple formControlName="accessibility">
-              <mat-option value="Room is located on the ground floor"
-                >Room is located on the ground floor
+              <mat-option value="Room is located on the ground floor">Room is located on the ground floor
               </mat-option>
-              <mat-option value="Room is completely wheelchair accessible"
-                >Room is completely wheelchair accessible</mat-option
-              >
-              <mat-option value="Upper floors accessible by elevator"
-                >Upper floors accessible by elevator
+              <mat-option value="Room is completely wheelchair accessible">Room is completely wheelchair accessible
               </mat-option>
-              <mat-option value="Upper floors accessible by stairs only"
-                >Upper floors accessible by stairs only</mat-option
-              >
-              <mat-option value="Toilet with grab rails"
-                >Toilet with grab rails</mat-option
-              >
+              <mat-option value="Upper floors accessible by elevator">Upper floors accessible by elevator
+              </mat-option>
+              <mat-option value="Upper floors accessible by stairs only">Upper floors accessible by stairs only
+              </mat-option>
+              <mat-option value="Toilet with grab rails">Toilet with grab rails</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Entertainment & Family Services</mat-label>
             <mat-select multiple formControlName="entertainment">
-              <mat-option value="Baby safety gates"
-                >Baby safety gates</mat-option
-              >
-              <mat-option value="Board games/puzzles"
-                >Board games/puzzles</mat-option
-              >
-              <mat-option value="Books, DVDs or music for children"
-                >Books, DVDs or music for children
+              <mat-option value="Baby safety gates">Baby safety gates</mat-option>
+              <mat-option value="Board games/puzzles">Board games/puzzles</mat-option>
+              <mat-option value="Books, DVDs or music for children">Books, DVDs or music for children
               </mat-option>
-              <mat-option value="Child safety socket covers"
-                >Child safety socket covers</mat-option
-              >
+              <mat-option value="Child safety socket covers">Child safety socket covers</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <button mat-button matStepperPrevious>Back</button>
-        <button
-          mat-button
-          matStepperNext
-          [disabled]="Hotel.controls['amenities'].invalid"
-        >
+        <button mat-button matStepperNext [disabled]="Hotel.controls['amenities'].invalid">
           Next
         </button>
       </mat-step>
@@ -537,14 +410,9 @@
           <div *ngFor="let progressInfo of progressInfos" class="mb-2">
             <span>{{ progressInfo.fileName }}</span>
             <div class="progress">
-              <div
-                class="progress-bar progress-bar-info progress-bar-striped"
-                role="progressbar"
-                attr.aria-valuenow="{{ progressInfo.value }}"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                [ngStyle]="{ width: progressInfo.value + '%' }"
-              >
+              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
+                [ngStyle]="{ width: progressInfo.value + '%' }">
                 {{ progressInfo.value }}%
               </div>
             </div>
@@ -553,39 +421,21 @@
           <div class="row">
             <div class="col-8">
               <label class="btn btn-default p-0">
-                <input
-                  type="file"
-                  name="multiple_images"
-                  accept="image/*"
-                  multiple
-                  (change)="selectFiles($event)"
-                />
+                <input type="file" name="multiple_images" accept="image/*" multiple (change)="selectFiles($event)" />
               </label>
             </div>
 
             <div class="col-4">
-              <button
-                class="btn btn-success btn-sm"
-                [disabled]="!selectedFiles"
-                (click)="uploadFiles()"
-              >
+              <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="uploadFiles()">
                 Add photos
               </button>
             </div>
 
             <div>
-              <img
-                *ngFor="let preview of previews"
-                [src]="preview"
-                class="preview"
-              />
+              <img *ngFor="let preview of previews" [src]="preview" class="preview" />
             </div>
 
-            <div
-              *ngIf="message.length"
-              class="alert alert-secondary my-3"
-              role="alert"
-            >
+            <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
               <ul *ngFor="let msg of message; let i = index">
                 <li>{{ msg }}</li>
               </ul>
@@ -593,18 +443,10 @@
 
             <div class="card mt-3 w-100 p-0" *ngIf="imageInfos.length > 0">
               <div class="card-header">List of Images</div>
-              <ul
-                class="list-group list-group-flush"
-                *ngFor="let image of imageInfos; let i = index"
-              >
+              <ul class="list-group list-group-flush" *ngFor="let image of imageInfos; let i = index">
                 <li class="list-group-item">
-                  <mat-icon
-                    color="warn"
-                    class="deleteImage"
-                    aria-hidden="false"
-                    (click)="deleteImage(i)"
-                    aria-label="Example home icon"
-                    >delete
+                  <mat-icon color="warn" class="deleteImage" aria-hidden="false" (click)="deleteImage(i)"
+                    aria-label="Example home icon">delete
                   </mat-icon>
 
                   <img class="preview" src="{{ image }}" />
@@ -636,25 +478,13 @@
         <div class="bg-white w-50 rounded-2 mb-2 p-5">
           <h1>Check-in</h1>
 
-          <input
-            placeholder="12hr format (default settings)"
-            aria-label="12hr format"
-            [ngxTimepicker]="default1"
-            readonly
-            class="time-picker"
-            formControlName="checkIn"
-          />
+          <input placeholder="12hr format (default settings)" aria-label="12hr format" [ngxTimepicker]="default1"
+            readonly class="time-picker" formControlName="checkIn" />
           <ngx-material-timepicker #default1></ngx-material-timepicker>
 
           <h1 class="mt-5">Check-out</h1>
-          <input
-            placeholder="12hr format (default settings)"
-            aria-label="12hr format"
-            [ngxTimepicker]="default2"
-            readonly
-            class="time-picker"
-            formControlName="checkOut"
-          />
+          <input placeholder="12hr format (default settings)" aria-label="12hr format" [ngxTimepicker]="default2"
+            readonly class="time-picker" formControlName="checkOut" />
           <ngx-material-timepicker #default2></ngx-material-timepicker>
         </div>
         <div class="bg-white w-50 rounded-2 mb-2 p-5">
@@ -676,17 +506,13 @@
         </div>
 
         <button mat-button matStepperPrevious>Back</button>
-        <button
-          mat-button
-          matStepperNext
-          [disabled]="
+        <button mat-button matStepperNext [disabled]="
             Hotel.controls['pets'].invalid &&
             Hotel.controls['children'].invalid &&
             Hotel.controls['cancellation'].invalid &&
             Hotel.controls['checkIn'].invalid &&
             Hotel.controls['checkOut'].invalid
-          "
-        >
+          ">
           Next
         </button>
       </mat-step>
@@ -697,14 +523,8 @@
             <mat-label>Paypal account</mat-label>
             <input matInput formControlName="paymentOption" />
           </mat-form-field>
-          <button
-            [disabled]="Hotel.invalid"
-            (click)="addHotel()"
-            mat-flat-button
-            color="primary"
-            class="w-100"
-            type="submit"
-          >
+          <button [disabled]="Hotel.invalid" (click)="addHotel()" mat-flat-button color="primary" class="w-100"
+            type="submit">
             Complete registration
           </button>
         </div>

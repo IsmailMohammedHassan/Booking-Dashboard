@@ -39,7 +39,9 @@
                 <h4 class="col-1"><img class="propImage" [src]="apartment.images[0]" alt=""></h4>
                 <h4 class="col-3" (click)="apartmentRedirect(apartment)">{{apartment.apartmentName }}</h4>
                 <h4 class="col-3">{{apartment.country}}/{{apartment.city}}</h4>
-                <h4 class="col-2">{{apartment.status}}</h4>
+                <h4 class="col-2" [ngClass]="{'text-success': apartment.status=='accepted'}"
+                  *ngIf="apartment.status=='accepted'">open</h4>
+                <h4 class="col-2" *ngIf="apartment.status!='accepted'">{{apartment.status}}</h4>
                 <h4 class="col-2">
                   <span class="badge-rating">{{
                     apartment.messages.length
@@ -69,12 +71,14 @@
           </div>
           <hr>
           <ng-container *ngFor="let hotel of hotelAny; let i = index">
-            <mat-card class="my-2 p-0 matCard">
+            <mat-card class="my-2 p-0 matCard" [ngClass]="{'pending': hotel.status=='pending'}">
               <div class="d-flex pt-4 align-items-center">
                 <h4 class="col-1"><img class="propImage" [src]="hotel.images[0]" alt=""></h4>
                 <h4 class="col-3" (click)="hotelRedirect(hotel)">{{hotel.hotelName }}</h4>
                 <h4 class="col-3">{{hotel.country}}/{{hotel.city}}</h4>
-                <h4 class="col-2">{{hotel.status}}</h4>
+                <h4 class="col-2" [ngClass]="{'text-success': hotel.status=='accepted'}"
+                  *ngIf="hotel.status=='accepted'">open</h4>
+                <h4 class="col-2" *ngIf="hotel.status!='accepted'">{{hotel.status}}</h4>
                 <h4 class="col-2">
                   <span class="badge-rating">{{
                     hotel.messages.length
@@ -107,7 +111,9 @@
                 <h4 class="col-1"><img class="propImage" [src]="camp.images[0]" alt=""></h4>
                 <h4 class="col-3" (click)="campRedirect(camp)">{{camp.campgroundName }}</h4>
                 <h4 class="col-3">{{camp.country}}/{{camp.city}}</h4>
-                <h4 class="col-2">{{camp.status}}</h4>
+                <h4 class="col-2" [ngClass]="{'text-success': camp.status=='accepted'}" *ngIf="camp.status=='accepted'">
+                  open</h4>
+                <h4 class="col-2" *ngIf="camp.status!='accepted'">{{camp.status}}</h4>
                 <h4 class="col-2">
                   <span class="badge-rating">{{
                     camp.messages.length

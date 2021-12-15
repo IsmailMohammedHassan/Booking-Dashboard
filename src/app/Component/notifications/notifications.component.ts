@@ -13,7 +13,7 @@ export class NotificationsComponent implements OnInit {
   ngOnInit(): void {
     this.userSer.getLoggedUser().subscribe(
       (user) => {
-        this.user = user.data;
+        this.user = user.data.notifications.reverse();
         console.log(user);
       },
       (err) => {

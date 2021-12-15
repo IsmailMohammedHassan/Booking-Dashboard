@@ -19,16 +19,20 @@ export class LoginComponent implements OnInit {
   login() {
     this.userService.LoginUser(this.UserData).subscribe((result) => {
       console.log('result', result);
-      if (result.success == false) {
-        this.wrong = 'Wrong email or password';
-      }
-      if (result.success == true) {
-        if (result.data.type == 'partner') {
-          localStorage.setItem('authentication', result.token);
-          window.location.href = 'http://localhost:4200/';
-        } else {
-          window.location.href = 'http://localhost:3000/auth/' + result.token;
+      if (result.data.status == 'active') {
+        if (result.success == false) {
+          this.wrong = 'Wrong email or password';
         }
+        if (result.success == true) {
+          if (result.data.type == 'partner') {
+            localStorage.setItem('authentication', result.token);
+            window.location.href = 'http://localhost:4200/';
+          } else {
+            window.location.href = 'http://localhost:3000/auth/' + result.token;
+          }
+        }
+      } else {
+        this.router.navigate(['/inactive/']);
       }
     });
   }

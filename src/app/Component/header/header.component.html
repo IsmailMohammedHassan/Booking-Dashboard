@@ -1,6 +1,6 @@
 <header>
   <div class="container d-flex align-items-center py-3 align-items-center justify-content-between">
-    <div class="d-flex"  >
+    <div class="d-flex">
       <h1 class="booking-header my-auto">Booking.com</h1>
 
     </div>
@@ -18,10 +18,12 @@
           </svg>
         </button>
       </form>
-      <div class="d-flex navElem flex-column align-items-center mx-3 pt-2" routerLink="/notifications">
+      <div class="d-flex navElem flex-column align-items-center mx-3 pt-2" routerLink="/notifications"
+        (click)="readNotification()">
 
         <h1 class="my-auto">
-          <span [matBadge]="notifi" matBadgeOverlap="true" matBadgeColor="warn"></span>
+          <ng-container *ngIf="notifi"><span [matBadge]="notifi" matBadgeOverlap="true" matBadgeColor="warn"></span>
+          </ng-container>
           <fa-icon [icon]="faBell"></fa-icon>
         </h1>
       </div>

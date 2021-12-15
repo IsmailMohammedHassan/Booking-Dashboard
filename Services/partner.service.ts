@@ -72,4 +72,13 @@ export class PartnerService {
       this.httpOptions
     );
   }
+  readNotification(): Observable<any> {
+    return this.http.get<any>(
+      environment.Api + 'user/read/notifications',
+      this.httpOptions
+    );
+  }
+  verifyUser(code: any): Observable<any> {
+    return this.http.get<any>(environment.Api + 'user/confirm/' + code);
+  }
 }
