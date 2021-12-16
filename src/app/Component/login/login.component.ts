@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   UserData: any = {};
-
+  hide = true;
   constructor(private userService: UserService, private router: Router) {}
   wrong: any;
   ngOnInit(): void {}
@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.userService.LoginUser(this.UserData).subscribe((result) => {
       console.log('result', result);
+      if (!result.success) {
+        this.wrong = 'Wrong email or password';
+      }
       if (result.data.status == 'active') {
-        if (result.success == false) {
-          this.wrong = 'Wrong email or password';
-        }
         if (result.success == true) {
           if (result.data.type == 'partner') {
             localStorage.setItem('authentication', result.token);

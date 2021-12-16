@@ -21,7 +21,7 @@
         <ng-container *ngFor="let apartment of apart ; let i = index">
           <div class="mb-3">
             <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel hideToggle (opened)="panelOpenState" (closed)="!panelOpenState">
                 <mat-expansion-panel-header class="py-2">
                   <mat-panel-title class="align-items-center col-6">
                     <mat-panel-title class="align-items-center  py-1">
@@ -73,7 +73,7 @@
         <ng-container *ngFor="let hotel of hotels ; let i = index">
           <div class="mb-3">
             <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel hideToggle (opened)="panelOpenState" (closed)="!panelOpenState">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="align-items-center col-6">
                     <mat-panel-title class="align-items-center  py-1">
@@ -124,7 +124,7 @@
         <ng-container *ngFor="let campground of camp ; let i = index">
           <div class="mb-3">
             <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel hideToggle (opened)="panelOpenState" (closed)="!panelOpenState">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="align-items-center col-6">
                     <mat-panel-title class="align-items-center  py-1">

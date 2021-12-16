@@ -26,7 +26,7 @@
           <div class="mb-3">
 
             <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel hideToggle (opened)="panelOpenState" (closed)="!panelOpenState">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="align-items-center col-6">
                     <img class="propImage m-3" [src]="apartment.images[0]" alt="" srcset="">
@@ -72,7 +72,7 @@
 
           <div class="mb-3">
             <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel hideToggle (opened)="panelOpenState" (closed)="!panelOpenState">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="align-items-center col-6">
                     <img class="propImage m-3" [src]="hotel.images[0]" alt="" srcset="">
@@ -119,7 +119,7 @@
 
           <div class="mb-3">
             <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState" (closed)="!panelOpenState">
+              <mat-expansion-panel hideToggle (opened)="panelOpenState" (closed)="!panelOpenState">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="align-items-center col-6">
                     <img class="propImage m-3" [src]="camp.images[0]" alt="" srcset="">
